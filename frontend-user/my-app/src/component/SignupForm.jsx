@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate
+import { useNavigate } from "react-router-dom";
+import googleLogo from "../assets/images/google-icon.png";
+import appleLogo from "../assets/images/apple-icon.png";
+
 
 const SignupForm = () => {
-  const navigate = useNavigate(); // ✅ Initialize navigation
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
-    firstName: "",
-    lastName: "",
-    birthday: "",
-    gender: "",
-    country: "",
     password: "",
     confirmPassword: "",
   });
@@ -30,144 +27,71 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-800 to-gray-900">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Sign Up</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              required
-            />
-          </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-500">
+      <div className="bg-gray-900 text-white p-8 rounded-xl shadow-lg w-full max-w-md">
+        {/* Logo */}
 
-          {/* First & Last Name */}
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-                required
-              />
-            </div>
-          </div>
+        {/* Title */}
+        <h1 className="text-xl font-bold text-center">Create your ChessPlayer account</h1>
 
-          {/* Birthday */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Birthday</label>
-            <input
-              type="date"
-              name="birthday"
-              value={formData.birthday}
-              onChange={handleChange}
-              className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              required
-            />
-          </div>
+        {/* Email Signup Form */}
+        <form onSubmit={handleSubmit} className="space-y-4 mt-6">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
 
-          {/* Gender */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Gender</label>
-            <select
-              name="gender"
-              value={formData.gender}
-              onChange={handleChange}
-              className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              required
-            >
-              <option value="" disabled>
-                Select Gender
-              </option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
 
-          {/* Country */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Country</label>
-            <select
-              name="country"
-              value={formData.country}
-              onChange={handleChange}
-              className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              required
-            >
-              <option value="" disabled>
-                Select Country
-              </option>
-              <option value="USA">United States</option>
-              <option value="Canada">Canada</option>
-              <option value="UK">United Kingdom</option>
-              <option value="India">India</option>
-              <option value="Australia">Australia</option>
-            </select>
-          </div>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            className="w-full p-3 border rounded-lg bg-gray-800 text-white focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
 
-          {/* Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Password</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          {/* Confirm Password */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="mt-1 w-full p-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-400"
-              required
-            />
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-400"
-          >
+          <button type="submit" className="w-full bg-green-600 text-white p-3 rounded-lg hover:bg-green-700">
             Sign Up
           </button>
         </form>
 
-        {/* Login Link (With Navigation) */}
-        <p className="text-sm text-center mt-4 text-gray-600">
+        {/* OR Divider */}
+        <div className="flex items-center my-4">
+          <div className="border-t border-gray-700 flex-grow"></div>
+          <span className="px-2 text-gray-400">OR</span>
+          <div className="border-t border-gray-700 flex-grow"></div>
+        </div>
+
+        {/* Social Signup Buttons */}
+        <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
+          <img src={googleLogo} alt="Google" className="h-5" />
+          Continue with Google
+        </button>
+        <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 mt-2 hover:bg-gray-700">
+          <img src={appleLogo} alt="Apple" className="h-5" />
+          Continue with Apple
+        </button>
+
+        {/* Already have an account */}
+        <p className="text-center text-gray-400 mt-4">
           Already have an account?{" "}
-          <button
-            onClick={() => navigate("/sign-in")} // ✅ Navigate to SigninPage
-            className="text-blue-500 hover:underline"
-          >
+          <button onClick={() => navigate("/sign-in")} className="text-green-400 hover:underline">
             Log In
           </button>
         </p>

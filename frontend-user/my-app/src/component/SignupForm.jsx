@@ -29,10 +29,9 @@ const SignupForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-500">
       <div className="bg-gray-900 text-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        {/* Logo */}
-
         {/* Title */}
         <h1 className="text-xl font-bold text-center">Create your ChessPlayer account</h1>
+
 
         {/* Email Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-4 mt-6">
@@ -79,14 +78,13 @@ const SignupForm = () => {
         </div>
 
         {/* Social Signup Buttons */}
-        <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
-          <img src={googleLogo} alt="Google" className="h-5" />
-          Continue with Google
-        </button>
-        <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 mt-2 hover:bg-gray-700">
-          <img src={appleLogo} alt="Apple" className="h-5" />
-          Continue with Apple
-        </button>
+        <><button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
+    <img src={googleLogo} alt="Google" className="h-5" />
+    Continue with Google
+  </button><button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 mt-2 hover:bg-gray-700">
+      <img src={appleLogo} alt="Apple" className="h-5" />
+      Continue with Apple
+    </button></>
 
         {/* Already have an account */}
         <p className="text-center text-gray-400 mt-4">

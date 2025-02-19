@@ -16,13 +16,12 @@ function App() {
     <div className="App">
       <h1 className="title">ChessPLayer</h1>
       {gameOver ? (
-        <div className="game-over">
-          <h2>{winner} thắng!</h2>
-          <button onClick={() => window.location.reload()}>Chơi lại</button>
-        </div>
-      ) : (
-        <GameBoard onGameOver={handleGameOver} />
-      )}
+    <div className="game-over-screen">
+      <h2>{winner} thắng!</h2>
+    </div>
+) : (
+  <GameBoard onGameOver={handleGameOver} />
+)}
     </div>
   );
 }

@@ -19,7 +19,7 @@ const HomePage = () => {
       <nav className="fixed left-0 top-0 h-full w-60 bg-black bg-opacity-80 flex flex-col justify-between p-6">
         {/* Sidebar Top */}
         <div className="w-full">
-          <h1 className="text-2xl font-bold mb-6">♟️ Chess Master</h1>
+          <h1 className="text-2xl font-bold mb-6">♟️ ChessPlayer</h1>
 
           {/* Play Menu with Dropdown */}
           <div 

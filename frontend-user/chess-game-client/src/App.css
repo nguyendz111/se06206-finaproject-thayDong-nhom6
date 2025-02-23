@@ -18,9 +18,8 @@
   display: inline-block;
   border: 10px solid whitesmoke; /* Viền bàn cờ gỗ */
   border-radius: 12px;
-  background: url('https://www.publicdomainpictures.net/pictures/320000/velka/wood-texture-background.jpg');
-  background-size: cover;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  background-size:auto;
+  box-shadow: 0 8px 16px rgba(213, 18, 18, 0.5);
   overflow: hidden;
   animation: fadeIn 1.5s ease;
 }

@@ -1,0 +1,52 @@
+.navbar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    background-color: #1e1e2f;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+  }
+  
+  .logo {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav-links li {
+    margin: 15px 0;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    width: 100%;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .nav-links a:hover {
+    background-color: #3a3a5e;
+  }
+  
+  /* Điều chỉnh phần nội dung chính để tránh bị che khuất bởi navbar */
+  .main-content {
+    margin-left: 220px; /* Để lề bên trái phù hợp với chiều rộng navbar */
+    padding: 20px;
+    text-align: center;
+  }
+  

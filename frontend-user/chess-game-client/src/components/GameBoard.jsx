@@ -3,6 +3,8 @@ import "../App.css";
 import { getPossibleMovesForPiece } from "../moves";
 import pieceImages from "../assets/pieceImages";
 
+
+
 const initialBoard = [
   ["rook_b", "knight_b", "bishop_b", "queen_b", "king_b", "bishop_b", "knight_b", "rook_b"],
   ["pawn_b", "pawn_b", "pawn_b", "pawn_b", "pawn_b", "pawn_b", "pawn_b", "pawn_b"],
@@ -80,7 +82,7 @@ const GameBoard = () => {
 
   return (
     <div className="game-container">
-      <h2>Lượt chơi: {turn === "w" ? "Trắng" : "Đen"}</h2>
+      <h2>Play: {turn === "w" ? "white" : "black"}</h2>
       <div className="board-container">{board.map((row, rowIndex) => <div key={rowIndex} className="row">{row.map((_, colIndex) => renderSquare(rowIndex, colIndex))}</div>)}</div>
 
       {/* Hiển thị thông báo thắng/thua */}

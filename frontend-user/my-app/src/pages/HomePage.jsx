@@ -110,10 +110,10 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* 🔹 PHẦN HƯỚNG DẪN CHƠI CỜ VUA */}
+      {/* 🔹 CHESS PLAYING GUIDE SECTION */}
       <section className="bg-gray-900 text-white py-16 px-6 text-center">
         <h2 className="text-3xl font-bold text-green-400 mb-6">
-          ♟️ How to Play Chess
+          ♚ How to Play Chess ♛
         </h2>
         <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
           Chess is a strategic board game played between two players.

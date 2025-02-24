@@ -14,10 +14,7 @@ const NavBar = () => {
         <li><Link to="/news">News</Link></li>
         <li><Link to="/social">Social</Link></li>
       </ul>
-      <div className="auth-buttons">
-        <button className="signup">Sign Up</button>
-        <button className="login">Log In</button>
-      </div>
+    
     </div>
   );
 };

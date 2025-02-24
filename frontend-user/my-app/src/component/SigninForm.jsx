@@ -79,6 +79,7 @@ const SigninForm = () => {
           <img src={appleLogo} alt="Apple" className="h-5 mr-3" />
           Continue with Apple
         </button>
+
         {/* Create Account Link */}
         <p className="text-center text-sm mt-4">
           Don't have an account?{" "}

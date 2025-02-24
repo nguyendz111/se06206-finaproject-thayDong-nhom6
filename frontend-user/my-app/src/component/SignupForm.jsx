@@ -29,9 +29,11 @@ const SignupForm = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-500">
       <div className="bg-gray-900 text-white p-8 rounded-xl shadow-lg w-full max-w-md">
-        {/* Title */}
-        <h1 className="text-xl font-bold text-center">Create your ChessPlayer account</h1>
-
+        {/* Logo & Title */}
+        <div className="text-center mb-6">
+          <span className="text-3xl">♟️</span> {/* Logo */}
+          <h2 className="text-2xl font-bold mt-2">Create your account</h2>
+        </div>
 
         {/* Email Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-4 mt-6">

@@ -1,7 +1,10 @@
+// Board.js
 import React, { useState } from "react";
 import "../App.css";
-import { getPossibleMovesForPiece } from "../moves";
-import pieceImages from "../assets/pieceImages";
+import { getPossibleMovesForPiece } from "../utils/chessLogic";
+import Square from "./Square";
+import "../style/Board.css";
+
 
 
 
@@ -16,16 +19,16 @@ const initialBoard = [
   ["rook_w", "knight_w", "bishop_w", "queen_w", "king_w", "bishop_w", "knight_w", "rook_w"],
 ];
 
-const GameBoard = () => {
+const Board = () => {
   const [board, setBoard] = useState(initialBoard);
   const [selectedPiece, setSelectedPiece] = useState(null);
   const [selectedPosition, setSelectedPosition] = useState(null);
   const [turn, setTurn] = useState("w");
   const [possibleMoves, setPossibleMoves] = useState([]);
-  const [winner, setWinner] = useState(null);  // Thêm trạng thái để theo dõi người thắng
+  const [winner, setWinner] = useState(null);
 
   const handleSquareClick = (row, col) => {
-    if (winner) return; // Không cho phép di chuyển sau khi kết thúc game
+    if (winner) return;
 
     const piece = board[row][col];
 
@@ -50,7 +53,6 @@ const GameBoard = () => {
       newBoard[row][col] = selectedPiece;
       newBoard[selectedPosition[0]][selectedPosition[1]] = "";
 
-      // Kiểm tra nếu vua bị ăn
       if (capturedPiece.includes("king")) {
         setWinner(turn === "w" ? "White wins!" : "Black wins!");
         return;
@@ -64,33 +66,35 @@ const GameBoard = () => {
     setSelectedPosition(null);
     setPossibleMoves([]);
   };
-  const renderSquare = (row, col) => {
-    const isBlack = (row + col) % 2 === 1;
-    const piece = board[row][col];
-    const isHighlighted = possibleMoves.some(move => move[0] === row && move[1] === col);
-
-    return (
-      <div
-        key={`${row}-${col}`}
-        className={`square ${isBlack ? "black-square" : "white-square"} ${isHighlighted ? "highlight" : ""}`}
-        onClick={() => handleSquareClick(row, col)}
-      >
-        {piece && <img src={pieceImages[piece]} alt={piece} className="chess-piece" />}
-      </div>
-    );
-  };
 
   return (
     <div className="game-container">
-      <h2>Play: {turn === "w" ? "white" : "black"}</h2>
-      <div className="board-container">{board.map((row, rowIndex) => <div key={rowIndex} className="row">{row.map((_, colIndex) => renderSquare(rowIndex, colIndex))}</div>)}</div>
+      <h2>Play: {turn === "w" ? "White" : "Black"}</h2>
+      <div className="board-container">
+        {board.map((row, rowIndex) => (
+          <div key={rowIndex} className="row">
+            {row.map((piece, colIndex) => (
+              <Square
+                key={`${rowIndex}-${colIndex}`}
+                row={rowIndex}
+                col={colIndex}
+                piece={piece}
+                isBlack={(rowIndex + colIndex) % 2 === 1}
+                isHighlighted={possibleMoves.some(move => move[0] === rowIndex && move[1] === colIndex)}
+                onClick={handleSquareClick}
+              />
+            ))}
+          </div>
+        ))}
+      </div>
 
-      {/* Hiển thị thông báo thắng/thua */}
       {winner && (
         <div className="game-over-overlay">
           <div className="game-over-message">
             <h2>{winner}</h2>
-            <button className="restart-button" onClick={() => window.location.reload()}>Play Again?</button>
+            <button className="restart-button" onClick={() => window.location.reload()}>
+              Play Again?
+            </button>
           </div>
         </div>
       )}
@@ -98,4 +102,4 @@ const GameBoard = () => {
   );
 };
 
-export default GameBoard;
+export default Board;

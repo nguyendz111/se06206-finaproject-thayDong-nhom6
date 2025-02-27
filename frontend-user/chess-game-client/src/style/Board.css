@@ -1,0 +1,91 @@
+/* Hiệu ứng bàn cờ gỗ */
+.board-container {
+    display: inline-block;
+    border: 10px solid whitesmoke; /* Viền bàn cờ gỗ */
+    border-radius: 12px;
+    background-size:auto;
+    box-shadow: 0 8px 16px rgba(213, 18, 18, 0.5);
+    overflow: hidden;
+    animation: fadeIn 1.5s ease;
+  }
+  .row {
+    display: flex;
+  }
+  
+  
+  .square {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .white-square {
+    background-color: #DEB887;
+  }
+  
+  .black-square {
+    background-color: #8B4513; 
+  }
+  
+  
+  .square:hover {
+    transform: scale(1.05);
+    box-shadow: inset 0 0 10px red;
+  }
+  
+  
+  .chess-piece {
+    width: 50px;
+    height: 50px;
+    cursor: grab;
+    transition: transform 0.2s ease;
+  }
+  
+  .chess-piece:active {
+    transform: scale(1.2);
+  }
+  
+  
+  .highlight {
+    background-color: gray; 
+    border-radius: 50%;
+  }
+  
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  .modal {
+    background: #ecf0f1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: #2c3e50;
+    animation: popUp 0.3s ease;
+  }
+  
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  

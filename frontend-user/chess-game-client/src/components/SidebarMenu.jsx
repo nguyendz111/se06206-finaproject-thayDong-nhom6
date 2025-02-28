@@ -11,11 +11,11 @@ const SidebarMenu = () => {
   const [showPuzzlesMenu, setShowPuzzlesMenu] = useState(false);
 
   return (
-    <div className="w-64 h-screen bg-black text-white p-4">
+    <div className="w-64 h-screen bg-gray-300 text-white p-4">
       {/* Tiêu đề với logo */}
       <div className="flex items-center mb-4">
         <img src="/logo.png" alt="Chess Logo" className="w-8 h-8 mr-2" />
-        <h1 className="text-xl font-bold text-green-500">Chess.com</h1>
+        <h1 className="text-xl font-bold text-amber-500">ChessPlayer</h1>
       </div>
 
       {/* Nút Play */}

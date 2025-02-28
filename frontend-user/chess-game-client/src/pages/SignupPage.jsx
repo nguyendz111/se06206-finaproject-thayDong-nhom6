@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import googleLogo from "../assets/images/google-icon.png";
-import appleLogo from "../assets/images/apple-icon.png";
+import appleLogo from "../assets/images/apple_icon.png";
+import googleLogo from "../assets/images/google_icon.png";
+
 
 
 const SignupForm = () => {
@@ -80,13 +81,14 @@ const SignupForm = () => {
         </div>
 
         {/* Social Signup Buttons */}
-        <><button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
-    <img src={googleLogo} alt="Google" className="h-5" />
-    Continue with Google
-  </button><button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 mt-2 hover:bg-gray-700">
-      <img src={appleLogo} alt="Apple" className="h-5" />
-      Continue with Apple
-    </button></>
+        <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
+          <img src={googleLogo} alt="Google" className="h-5" />
+          Continue with Google
+        </button>
+        <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 mt-2 hover:bg-gray-700">
+          <img src={appleLogo} alt="Apple" className="h-5" />
+          Continue with Apple
+        </button>
 
         {/* Already have an account */}
         <p className="text-center text-gray-400 mt-4">

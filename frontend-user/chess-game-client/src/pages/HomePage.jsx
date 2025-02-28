@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import chessBg from "../assets/image/chess-bg.jpg"
+import chessBg from "../assets/images/chess-bg.jpg";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -73,7 +72,7 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer className="bg-black text-white text-center py-6">
-        <p>© 2025 Chess Master | All Rights Reserved</p>
+        <p>© 2025 ChessPlayer | All Rights Reserved</p>
       </footer>
     </div>
   );

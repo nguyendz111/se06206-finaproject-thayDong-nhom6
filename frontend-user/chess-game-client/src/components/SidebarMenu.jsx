@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { 
   FaChessPawn, FaPuzzlePiece, FaGraduationCap, FaEye, 
   FaNewspaper, FaUsers, FaEllipsisH, FaSearch, FaSignInAlt, FaUserPlus 
@@ -9,6 +9,7 @@ import { GiTrophyCup, GiChessKnight, GiBrain, GiArchiveRegister } from "react-ic
 const SidebarMenu = () => {
   const [showPlayMenu, setShowPlayMenu] = useState(false);
   const [showPuzzlesMenu, setShowPuzzlesMenu] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="w-64 h-screen bg-black text-white p-4">
@@ -80,12 +81,18 @@ const SidebarMenu = () => {
 
       {/* Nút đăng ký & đăng nhập */}
       <div className="mt-4">
-        <Link to="/signup" className="block w-full p-2 bg-green-600 text-center rounded flex items-center justify-center">
+        <button 
+          className="block w-full p-2 bg-green-600 text-center rounded flex items-center justify-center"
+          onClick={() => navigate("/SignupPage")}
+        >
           <FaUserPlus className="mr-2" /> Sign Up
-        </Link>
-        <Link to="/login" className="block w-full p-2 bg-gray-600 text-center rounded mt-2 flex items-center justify-center">
+        </button>
+        <button 
+          className="block w-full p-2 bg-gray-600 text-center rounded mt-2 flex items-center justify-center"
+          onClick={() => navigate("/SigninPage")}
+        >
           <FaSignInAlt className="mr-2" /> Log In
-        </Link>
+        </button>
       </div>
     </div>
   );

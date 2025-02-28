@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a3e1c680.css",
+    "main.js": "/static/js/main.86b6d68f.js",
+    "static/js/488.9c92ff38.chunk.js": "/static/js/488.9c92ff38.chunk.js",
+    "static/media/chess-bg.jpg": "/static/media/chess-bg.9f2bf880589156bab2ae.jpg",
+    "static/media/apple-icon.png": "/static/media/apple-icon.187fa0d1b740cf4b99a6.png",
+    "static/media/google-icon.png": "/static/media/google-icon.39c52b1bcccb20569aa4.png",
+    "index.html": "/index.html",
+    "main.a3e1c680.css.map": "/static/css/main.a3e1c680.css.map",
+    "main.86b6d68f.js.map": "/static/js/main.86b6d68f.js.map",
+    "488.9c92ff38.chunk.js.map": "/static/js/488.9c92ff38.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a3e1c680.css",
+    "static/js/main.86b6d68f.js"
+  ]
+}

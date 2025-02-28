@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import googleLogo from "../assets/images/google-icon.png";
-import appleLogo from "../assets/images/apple-icon.png";
+import googleLogo from "../assets/image/google-icon.png";
+import appleLogo from "../assets/image/apple-icon.png";
 
-const SigninForm = () => {
+const SigninForm = () => {  // Đảm bảo tên biến đúng với file
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -95,4 +95,4 @@ const SigninForm = () => {
   );
 };
 
-export default SigninForm;
+export default SigninForm;  // Đảm bảo export đúng

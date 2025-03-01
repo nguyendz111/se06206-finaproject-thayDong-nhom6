@@ -1,81 +1,131 @@
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import chessBg from "../assets/images/chess-bg.jpg";
+import { Link } from "react-router-dom";
+import appleLogo from "../assets/images/apple_icon.png";
+import googleLogo from "../assets/images/google_icon.png";
 
-const HomePage = () => {
+const SigninForm = () => {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState(""); // Thêm state để hiển thị lỗi
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(""); // Reset lỗi trước khi xử lý
+
+    // Kiểm tra email hợp lệ
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError("Invalid email format");
+      return;
+    }
+    
+    // Kiểm tra mật khẩu tối thiểu 6 ký tự
+    if (formData.password.length < 6) {
+      setError("Password must be at least 6 characters long");
+      return;
+    }
+
+    try {
+      console.log("Signing in with:", formData);
+      // Gọi API đăng nhập giả lập
+      const response = await fakeLoginAPI(formData.email, formData.password);
+      
+      if (response.success) {
+        navigate("/dashboard"); // Điều hướng sau khi đăng nhập thành công
+      } else {
+        setError("Incorrect email or password");
+      }
+    } catch (error) {
+      setError("An error occurred. Please try again.");
+    }
+  };
+
+  // Hàm giả lập API đăng nhập (thay bằng API thực tế nếu có)
+  const fakeLoginAPI = async (email, password) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (email === "user@example.com" && password === "password123") {
+          resolve({ success: true });
+        } else {
+          resolve({ success: false });
+        }
+      }, 1000);
+    });
+  };
 
   return (
-    <div>
-      {/* 🔹 PHẦN HERO - ẢNH NỀN */}
-      <div
-        className="h-screen flex flex-col items-center justify-center text-white p-6 relative"
-        style={{
-          backgroundImage: `url(${chessBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        {/* Hero Section */}
-        <div className="text-center mt-12">
-          <h2 className="text-5xl font-bold mb-4">Play Chess Like A Master</h2>
-          <p className="text-lg opacity-80">
-            Challenge players, test your skills, and climb the leaderboard!
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-800 p-4">
+      <div className="bg-gray-900 text-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
+        <div className="text-center mb-6">
+          <span className="text-4xl">♟️</span>
+          <h2 className="text-2xl font-bold mt-2">Sign In to Chess Master</h2>
         </div>
 
-        {/* Game Mode Selection */}
-        <div className="bg-black bg-opacity-70 p-8 rounded-lg shadow-lg mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Choose Your Game Mode</h2>
-          <div className="flex flex-col gap-4">
-            <button
-              className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg transition transform hover:scale-105"
-              onClick={() => navigate("/game/player-vs-player")}
-            >
-              🏆 Play Online
-            </button>
-            <button
-              className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition transform hover:scale-105"
-              onClick={() => navigate("/game/player-vs-computer")}
-            >
-              🤖 Play BOT
-            </button>
+        {/* Hiển thị lỗi nếu có */}
+        {error && <p className="text-red-400 text-center mb-4">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring focus:ring-blue-400"
+              placeholder="Email"
+              required
+            />
           </div>
-        </div>
-      </div>
 
-      {/* 🔹 CHESS PLAYING GUIDE SECTION */}
-      <section className="bg-gray-900 text-white py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold text-green-400 mb-6">
-          ♚ How to Play Chess ♛
-        </h2>
-        <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
-          Chess is a strategic board game played between two players.
-          The objective is to checkmate your opponent’s king.
-        </p>
-        <div className="max-w-3xl mx-auto text-left">
-          <ul className="list-disc list-inside text-gray-300 space-y-2">
-            <li>♜ Rooks move in straight lines.</li>
-            <li>♞ Knights move in an "L" shape.</li>
-            <li>♝ Bishops move diagonally.</li>
-            <li>♛ The Queen can move in any direction.</li>
-            <li>♚ The King moves one square in any direction.</li>
-            <li>♟️ Pawns move forward but capture diagonally.</li>
-          </ul>
+          <div>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full p-3 bg-gray-800 border border-gray-600 rounded-lg focus:ring focus:ring-blue-400"
+              placeholder="Password"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-green-500 text-white py-3 rounded-lg hover:bg-green-600 transition duration-200"
+          >
+            Sign In
+          </button>
+        </form>
+
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-gray-700" />
+          <span className="px-3 text-gray-400 text-sm">OR</span>
+          <hr className="flex-grow border-gray-700" />
         </div>
-        <button
-          className="mt-6 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition transform hover:scale-105"
-          onClick={() => navigate("/how-to-play")}
-        >
-          Learn More
+
+        <button className="w-full bg-gray-800 border border-gray-600 flex items-center justify-center py-3 rounded-lg hover:bg-gray-700 transition duration-200 mb-3">
+          <img src={googleLogo} alt="Google" className="h-5 mr-3" />
+          Continue with Google
         </button>
-      </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-white text-center py-6">
-        <p>© 2025 ChessPlayer | All Rights Reserved</p>
-      </footer>
+        <button className="w-full bg-gray-800 border border-gray-600 flex items-center justify-center py-3 rounded-lg hover:bg-gray-700 transition duration-200">
+          <img src={appleLogo} alt="Apple" className="h-5 mr-3" />
+          Continue with Apple
+        </button>
+
+        <p className="text-center text-sm mt-4">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-blue-400 hover:underline">
+            Sign Up
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
 
-export default HomePage;
+export default SigninForm;

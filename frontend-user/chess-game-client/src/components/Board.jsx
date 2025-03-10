@@ -4,8 +4,6 @@ import { getPossibleMovesForPiece } from "../utils/chessLogic";
 import Square from "./Square";
 import { useNavigate } from "react-router-dom";
 import "../style/Board.css";
-
-// Import hình ảnh đúng cách
 import playerIcon from "../assets/images/hand-chess.png";
 import aiIcon from "../assets/images/computer-icon.png";
 

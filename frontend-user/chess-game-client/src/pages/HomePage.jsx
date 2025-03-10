@@ -1,82 +1,78 @@
+import { useState } from "react";
+import { FaChess, FaPuzzlePiece, FaGraduationCap, FaComments, FaUsers, FaBars, FaSignInAlt, FaSun, FaGlobe } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import chessBg from "../assets/images/chess-bg.jpg";
 
-const HomePage = () => {
+export default function HomePage() {
   const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [language, setLanguage] = useState("en");
+
+  const menuItems = [
+    { name: "Play Online", icon: <FaChess />, path: "/game" }, 
+    { name: "Play Computer", icon: <FaChess />, path: "/play-computer" },
+    { name: "Create Room", icon: <FaUsers />, path: "/create-room" },
+    { name: "Solve Puzzles", icon: <FaPuzzlePiece />, path: "/puzzles" },
+    { name: "Lessons", icon: <FaGraduationCap />, path: "/learn" },
+    { name: "Watch Games", icon: <FaComments />, path: "/watch-games" },
+  ];
+  
+
+  const toggleLanguage = () => {
+    setLanguage((prev) => (prev === "en" ? "vi" : "en"));
+  };
 
   return (
-    <div>
-      {/* 🔹 PHẦN HERO - ẢNH NỀN */}
+    <div className="flex h-screen">
+      {/* Sidebar */}
       <div
-        className="h-screen flex flex-col items-center justify-center text-white p-6 relative"
-        style={{
-          backgroundImage: `url(${chessBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        className={`bg-red-700 text-white p-4 transition-all duration-300 ease-in-out ${isExpanded ? "w-60" : "w-16"}`}
       >
-        {/* Hero Section */}
-        <div className="text-center mt-12">
-          <h2 className="text-5xl font-bold mb-4">Play Chess Like A Master</h2>
-          <p className="text-lg opacity-80">
-            Challenge players, test your skills, and climb the leaderboard!
-          </p>
-        </div>
-
-        {/* Game Mode Selection */}
-        <div className="bg-black bg-opacity-70 p-8 rounded-lg shadow-lg mt-10">
-          <h2 className="text-2xl font-semibold mb-4">Choose Your Game Mode</h2>
-          <div className="flex flex-col gap-4">
-            <button
-              className="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg transition transform hover:scale-105"
-              onClick={() => navigate("/game/player-vs-player")}
+        <button
+          className="text-white mb-4 flex items-center gap-2"
+          onClick={() => setIsExpanded(!isExpanded)}
+        >
+          <FaBars /> <span className={isExpanded ? "block" : "hidden"}>Menu</span>
+        </button>
+        <h1 className={`text-lg font-bold mb-4 ${isExpanded ? "block" : "hidden"}`}>ChessPlayer</h1>
+        <ul className="space-y-4">
+          {menuItems.map((item) => (
+            <li
+              key={item.name}
+              className="flex items-center gap-2 cursor-pointer p-2 rounded-md hover:bg-red-800"
+              onClick={() => navigate(item.path)}
             >
-              🏆 Play Online
-            </button>
-            <button
-              className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition transform hover:scale-105"
-              onClick={() => navigate("/game/player-vs-computer")}
-            >
-              🤖 Play BOT
-            </button>
-          </div>
+              {item.icon} <span className={isExpanded ? "block" : "hidden"}>{item.name}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-10 space-y-4">
+          <button className="flex items-center gap-2" onClick={toggleLanguage}>
+            <FaGlobe /> <span className={isExpanded ? "block" : "hidden"}>{language === "en" ? "English" : "Tiếng Việt"}</span>
+          </button>
+          <button className="flex items-center gap-2">
+            <FaSun /> <span className={isExpanded ? "block" : "hidden"}>Light Mode</span>
+          </button>
+          <button className="flex items-center gap-2" onClick={() => navigate("/login")}>
+            <FaSignInAlt /> <span className={isExpanded ? "block" : "hidden"}>Sign In</span>
+          </button>
         </div>
       </div>
 
-      {/* 🔹 CHESS PLAYING GUIDE SECTION */}
-      <section className="bg-gray-900 text-white py-16 px-6 text-center">
-        <h2 className="text-3xl font-bold text-green-400 mb-6">
-          ♚ How to Play Chess ♛
-        </h2>
-        <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-6">
-          Chess is a strategic board game played between two players.
-          The objective is to checkmate your opponent’s king.
-        </p>
-        <div className="max-w-3xl mx-auto text-left">
-          <ul className="list-disc list-inside text-gray-300 space-y-2">
-            <li>♜ Rooks move in straight lines.</li>
-            <li>♞ Knights move in an "L" shape.</li>
-            <li>♝ Bishops move diagonally.</li>
-            <li>♛ The Queen can move in any direction.</li>
-            <li>♚ The King moves one square in any direction.</li>
-            <li>♟️ Pawns move forward but capture diagonally.</li>
-          </ul>
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-gray-100">
+        <h2 className="text-2xl font-bold text-red-700 mb-6">Welcome to ChessPlayer!</h2>
+        <div className="flex flex-col gap-4 w-80">
+          {menuItems.map((item) => (
+            <button
+              key={item.name}
+              className="flex items-center gap-3 px-6 py-4 border-2 rounded-lg transition font-semibold w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+              onClick={() => navigate(item.path)}
+            >
+              {item.icon} {item.name}
+            </button>
+          ))}
         </div>
-        <button
-          className="mt-6 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg transition transform hover:scale-105"
-          onClick={() => navigate("/how-to-play")}
-        >
-            
-          Learn More
-        </button>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-black text-white text-center py-6">
-        <p>© 2025 ChessPlayer | All Rights Reserved</p>
-      </footer>
+      </div>
     </div>
   );
-};
-
-export default HomePage;
+}

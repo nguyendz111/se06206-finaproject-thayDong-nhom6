@@ -7,4 +7,10 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  darkMode: "class", // Bật chế độ dark mode theo class
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 }
+

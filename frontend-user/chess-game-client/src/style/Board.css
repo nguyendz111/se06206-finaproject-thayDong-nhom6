@@ -1,91 +1,187 @@
 /* Hiệu ứng bàn cờ gỗ */
 .board-container {
-    display: inline-block;
-    border: 10px solid whitesmoke; /* Viền bàn cờ gỗ */
-    border-radius: 12px;
-    background-size:auto;
-    box-shadow: 0 8px 16px rgba(213, 18, 18, 0.5);
-    overflow: hidden;
-    animation: fadeIn 1.5s ease;
-  }
-  .row {
-    display: flex;
-  }
-  
-  
-  .square {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .white-square {
-    background-color: #DEB887;
-  }
-  
-  .black-square {
-    background-color: #8B4513; 
-  }
-  
-  
-  .square:hover {
-    transform: scale(1.05);
-    box-shadow: inset 0 0 10px red;
-  }
-  
-  
-  .chess-piece {
-    width: 50px;
-    height: 50px;
-    cursor: grab;
-    transition: transform 0.2s ease;
-  }
-  
-  .chess-piece:active {
-    transform: scale(1.2);
-  }
-  
-  
-  .highlight {
-    background-color: gray; 
-    border-radius: 50%;
-  }
-  
-  
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    animation: fadeIn 0.5s ease;
-  }
-  
-  .modal {
-    background: #ecf0f1;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    color: #2c3e50;
-    animation: popUp 0.3s ease;
-  }
-  
-  
-  @keyframes fadeIn {
-    from {
+  display: inline-block;
+  border: 10px solid rgb(209, 211, 206); /* Viền bàn cờ gỗ */
+  border-radius: 12px;
+  background-size: auto;
+  box-shadow: 0 8px 16px rgba(126, 36, 36, 0);
+  overflow: hidden;
+  animation: fadeIn 1.5s ease;
+}
+
+/* Định dạng hàng bàn cờ */
+.row {
+  display: flex;
+}
+
+/* Kích thước và hiệu ứng ô cờ */
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.white-square {
+  background-color: #DEB887;
+}
+
+.black-square {
+  background-color: #1a683e;
+}
+
+.square:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 10px red;
+}
+
+/* Định dạng quân cờ */
+.chess-piece {
+  width: 50px;
+  height: 50px;
+  cursor: grab;
+  transition: transform 0.2s ease;
+}
+
+.chess-piece:active {
+  transform: scale(1.2);
+}
+
+/* Hiệu ứng ô cờ được chọn */
+.highlight {
+  background-color: gray;
+  border-radius: 50%;
+}
+
+/* Hiệu ứng thông báo chiến thắng */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(188, 16, 16, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: fadeIn 0.5s ease;
+}
+
+.modal {
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #0d7ff1;
+  animation: popUp 0.3s ease;
+}
+
+/* Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+  from {
       opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
   }
-  
+  to {
+      opacity: 1;
+  }
+}
+
+/* Căn chỉnh tổng thể */
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 40px;
+}
+
+.board-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.board-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Điều chỉnh vị trí của chế độ chơi */
+.mode-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  position: absolute;
+  right: 65px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.play-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  width: 200px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.play-button.online {
+  background-color: #4CAF50;
+  color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.play-button.online:hover {
+  background-color: #45a049;
+}
+
+.play-button.computer {
+  background-color: #333;
+  color: white;
+}
+
+.play-button.computer:hover {
+  background-color: #444;
+}
+
+.icon {
+  width: 34px;
+  height: 34px;
+}
+
+.right-panel {
+  width: 300px;
+  text-align: center;
+  color: white;
+}
+
+.right-panel h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.stats span {
+  font-weight: bold;
+}

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import SidebarMenu from "./components/SidebarMenu";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AppRoutes from "./router/AppRoutes";
-
+import LessonsPage from "./pages/LessonsPage"; // Import LessonsPage
 
 function App() {
   const [gameOver, setGameOver] = useState(false);
@@ -15,15 +14,10 @@ function App() {
 
   return (
     <Router>
-      <div className="flex h-screen bg-gray-800">
-        <SidebarMenu />
-        <div className="flex justify-center items-center w-full h-full">
-          <div className="main-content text-white">
-            <h1 className="text-4xl font-bold text-center mb-6">ChessPlayer</h1>
-            <AppRoutes onGameOver={handleGameOver} gameOver={gameOver} winner={winner} />
-          </div>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/*" element={<AppRoutes onGameOver={handleGameOver} gameOver={gameOver} winner={winner} />} />
+        <Route path="/learn" element={<LessonsPage />} /> {/* Add LessonsPage Route */}
+      </Routes>
     </Router>
   );
 }

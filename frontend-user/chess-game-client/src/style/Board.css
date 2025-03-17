@@ -1,12 +1,13 @@
 /* Hiệu ứng bàn cờ gỗ */
 .board-container {
   display: inline-block;
-  border: 10px solid rgb(209, 211, 206); /* Viền bàn cờ gỗ */
+  border: 10px solid rgb(226, 235, 226); /* Viền bàn cờ gỗ */
   border-radius: 12px;
   background-size: auto;
-  box-shadow: 0 8px 16px rgba(126, 36, 36, 0);
+  box-shadow: 0 8px 16px rgba(216, 6, 6, 0);
   overflow: hidden;
   animation: fadeIn 1.5s ease;
+  background: linear-gradient(to right, #8b5a2b, #deb887); /* Thêm hiệu ứng nền gỗ */
 }
 
 /* Định dạng hàng bàn cờ */
@@ -22,6 +23,7 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .white-square {
@@ -34,7 +36,7 @@
 
 .square:hover {
   transform: scale(1.05);
-  box-shadow: inset 0 0 10px red;
+  box-shadow: inset 0 0 10px rgb(230, 226, 226);
 }
 
 /* Định dạng quân cờ */
@@ -51,43 +53,58 @@
 
 /* Hiệu ứng ô cờ được chọn */
 .highlight {
-  background-color: gray;
+  background-color: rgb(255, 223, 0);
   border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 223, 0, 0.7);
 }
 
-/* Hiệu ứng thông báo chiến thắng */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(188, 16, 16, 0.7);
+/* Thêm hiệu ứng đổ bóng cho bàn cờ */
+.chessboard-container {
+  background-color: #4d4d4d;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Cải thiện hiệu ứng nền */
+body {
+  background: linear-gradient(to right, #0e0909, #2a5298);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+/* Hiệu ứng nút bấm */
+.play-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  animation: fadeIn 0.5s ease;
+  gap: 10px;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  width: 200px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
+.play-button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Cải thiện hiển thị thông báo chiến thắng */
 .modal {
-  background: #ecf0f1;
+  background: #228ca7;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
-  color: #0d7ff1;
+  color: #fff;
   animation: popUp 0.3s ease;
-}
-
-/* Hiệu ứng xuất hiện */
-@keyframes fadeIn {
-  from {
-      opacity: 0;
-  }
-  to {
-      opacity: 1;
-  }
 }
 
 /* Căn chỉnh tổng thể */
@@ -97,19 +114,6 @@
   align-items: center;
   height: 100vh;
   gap: 40px;
-}
-
-.board-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
-}
-
-.board-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 /* Điều chỉnh vị trí của chế độ chơi */
@@ -124,64 +128,63 @@
   transform: translateY(-50%);
 }
 
+/* Style chung cho nút Play */
+.play-button.computer,
+.play-button.online {
+  background-color: #4CAF50; /* Màu xanh lục */
+  color: white;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.6);
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+width: 180px;
+  height: 80px;
+  font-size: 16px;
+  line-height: 1.2;
+  border-radius: 10px;
+}
+
+.play-button.computer:hover,
+.play-button.online:hover {
+  background-color: #3e8e41;
+  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.8);
+  transform: scale(1.05);
+}
+.mode-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px; /* Tạo khoảng cách giữa các nút */
+}
+
 .play-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 15px 20px;
+  padding: 15px;
+  width: 180px;
+  height: 80px;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
-  width: 200px;
   text-align: center;
   transition: 0.3s;
-}
-
-.play-button.online {
-  background-color: #4CAF50;
-  color: white;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.play-button.online:hover {
-  background-color: #45a049;
+.play-button img {
+  width: 50px;
+  height: 50px;
 }
 
-.play-button.computer {
-  background-color: #333;
-  color: white;
-}
-
-.play-button.computer:hover {
-  background-color: #444;
-}
-
-.icon {
-  width: 34px;
-  height: 34px;
-}
-
-.right-panel {
-  width: 300px;
-  text-align: center;
-  color: white;
-}
-
-.right-panel h2 {
-  font-size: 24px;
+.button-label {
+  margin-top: 10px; /* Đẩy chữ xuống dưới nút */
+  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.stats {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.stats span {
-  font-weight: bold;
+  color: white;
 }

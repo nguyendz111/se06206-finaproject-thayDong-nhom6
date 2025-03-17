@@ -1,22 +1,7 @@
-
-import React from "react";
-import SignupForm from "../components/SignupForm"; // Chắc chắn rằng đường dẫn import đúng
-
-const SignupPage = () => {
-  return <SignupForm />;
-};
-
-export default SignupPage;
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import googleLogo from "../assets/image/google-icon.png";
-import appleLogo from "../assets/image/apple-icon.png";
-
 import appleLogo from "../assets/images/apple_icon.png";
 import googleLogo from "../assets/images/google_icon.png";
-
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -83,21 +68,16 @@ const SignupForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-800 to-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-gray-500">
       <div className="bg-gray-900 text-white p-8 rounded-xl shadow-lg w-full max-w-md">
         {/* Logo & Title */}
-        <div className="flex flex-col items-center mb-4">
-          <span className="text-2xl">♟️</span> {/* Logo */}
-          <h2 className="text-2xl font-bold mt-2">Chess Master</h2>
+        <div className="text-center mb-6">
+          <span className="text-3xl">♟️</span> {/* Logo */}
+          <h2 className="text-2xl font-bold mt-2">Create your account</h2>
         </div>
-
-
-        {/* Title */}
-        <h2 className="text-lg font-semibold text-center">Create your account</h2>
 
         {/* Hiển thị lỗi nếu có */}
         {error && <p className="text-red-400 text-center mb-4">{error}</p>}
-
 
         {/* Email Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-4 mt-6">
@@ -144,18 +124,6 @@ const SignupForm = () => {
         </div>
 
         {/* Social Signup Buttons */}
-
-        <div className="space-y-2">
-          <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
-            <img src={googleLogo} alt="Google" className="h-5" />
-            Continue with Google
-          </button>
-          <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
-            <img src={appleLogo} alt="Apple" className="h-5" />
-            Continue with Apple
-          </button>
-        </div>
-
         <button className="w-full bg-gray-800 text-white p-3 rounded-lg flex items-center justify-center gap-2 hover:bg-gray-700">
           <img src={googleLogo} alt="Google" className="h-5" />
           Continue with Google
@@ -164,7 +132,6 @@ const SignupForm = () => {
           <img src={appleLogo} alt="Apple" className="h-5" />
           Continue with Apple
         </button>
-
 
         {/* Already have an account */}
         <p className="text-center text-gray-400 mt-4">
@@ -179,4 +146,3 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
-

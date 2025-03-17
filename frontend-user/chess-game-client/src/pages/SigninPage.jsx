@@ -1,13 +1,4 @@
 
-import React from "react";
-import SigninForm from "../components/SigninForm"; // Chắc chắn rằng đường dẫn import đúng
-
-const SigninPage = () => {
-  return <SigninForm />;
-};
-
-export default SigninPage;
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -139,4 +130,3 @@ const SigninForm = () => {
 };
 
 export default SigninForm;
-

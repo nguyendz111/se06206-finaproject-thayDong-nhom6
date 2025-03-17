@@ -77,8 +77,166 @@ Each piece has a general point value:
 - Castle early to protect the king.
 - Avoid moving the same piece multiple times in the opening.
 `,
-    },
-  ],
+},
+],
+
+Intermediate: [
+  {
+    title: "Tactical Motifs in Chess",
+    content: `Common tactical patterns help players gain an advantage:
+
+1. Forks:
+- A single piece attacks two or more enemy pieces at the same time.
+- Knights are great at executing forks.
+
+2. Pins:
+- A piece is unable to move without exposing a more valuable piece behind it.
+- Bishops, rooks, and queens often create pins.
+
+3. Skewers:
+- Similar to pins, but the more valuable piece is in front.
+- The opponent is forced to move the valuable piece, exposing the less valuable one.
+
+4. Discovered Attacks:
+- Moving one piece reveals an attack by another.
+- A discovered check is especially powerful.
+
+5. Double Attacks:
+- A move that threatens two things at once.
+- Often leads to winning material or a checkmate.
+
+6. Deflection and Decoy:
+- Forcing an opponent's piece away from a key square.
+`,
+  },
+  {
+    title: "Positional Play",
+    content: `Unlike tactics, positional play focuses on long-term advantages.
+
+1. Piece Activity:
+- Knights and bishops should be placed where they control many squares.
+- Avoid placing pieces where they have no mobility.
+
+2. Pawn Structure:
+- Double, isolated, or backward pawns can become weaknesses.
+- Connected pawns are stronger.
+
+3. Open Files and Diagonals:
+- Rooks and queens become stronger when placed on open files.
+- Bishops dominate long diagonals.
+
+4. King Safety:
+- Castling is a must in most games.
+- Always be mindful of opponent's threats to your king.
+
+5. Space Control:
+- Having more space allows for better maneuvering.
+- Controlling the center gives you more space to move.
+`,
+  },
+],
+
+Advanced: [
+  {
+    title: "Advanced Opening Concepts",
+    content: `Beyond basic openings, advanced players focus on deeper strategic ideas.
+  
+  1. Pawn Breaks:
+  - Main idea: Break the pawn structure to activate pieces.
+  - Example: The d4-d5 push in many openings.
+  - Used in openings like the Sicilian Defense (c5 break) or the French Defense (e6-d5 break).
+  
+  2. Opening Theory:
+  - Mastering common variations provides an advantage.
+  - Popular openings:
+    - Sicilian Defense (1. e4 c5): Sharp playstyle, strong counterattack.
+    - Ruy-Lopez (1. e4 e5 2. Nf3 Nc6 3. Bb5): Well-structured development with deep tactical play.
+    - French Defense (1. e4 e6): Solid but leads to a closed position.
+  
+  3. Modern Openings:
+  - Instead of directly controlling the center with pawns, these openings allow the opponent to occupy the center first and then attack.
+  - Examples:
+    - King's Indian Defense (1. d4 Nf6 2. c4 g6)
+    - Nimzo-Indian Defense (1. d4 Nf6 2. c4 e6 3. Nc3 Bb4)
+    - Pirc Defense (1. e4 d6 2. d4 Nf6 3. Nc3 g6)
+  
+  4. Gambits (Sacrificing Material for Initiative):
+  - A gambit sacrifices one or more pawns to gain development or attacking chances.
+  - Examples:
+    - Queen’s Gambit (1. d4 d5 2. c4): White sacrifices a pawn to control the center.
+    - King’s Gambit (1. e4 e5 2. f4): White plays aggressively, sacrificing the f4 pawn.
+    - Danish Gambit (1. e4 e5 2. d4 exd4 3. c3): White sacrifices two pawns for rapid piece development.
+  
+  5. Opening Traps:
+  - Some traps can win material early in the game.
+  - Example: Fool’s Mate (1. f3 e5 2. g4 Qh4#) - The fastest checkmate in chess.
+  - Example: Scholar’s Mate (1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7#).
+  
+  6. Opening Transpositions:
+  - Many openings can lead to similar middlegame positions through different move orders.
+  - Example: King's Indian Defense can transpose into Grünfeld Defense or Benoni Defense.
+  
+  7. Choosing Openings Based on Playstyle:
+  - Aggressive attackers: Sicilian Defense, King’s Gambit, Danish Gambit.
+  - Positional players: Queen’s Gambit, Caro-Kann, English Opening.
+  - Counterattackers: King’s Indian, Pirc Defense, Benoni Defense.
+
+  `},
+  
+  
+  {
+    title: "Endgame Fundamentals",
+    content: `Mastering the endgame is crucial for winning close games.
+
+1. King Activity:
+- The king is a powerful piece in the endgame.
+- Move your king toward the center to control key squares.
+
+2. Opposition:
+- When kings face each other with one square in between, the player not moving has an advantage.
+- Use opposition to force your opponent back.
+
+3. Pawn Promotion:
+- Pushing a passed pawn (one with no enemy pawns blocking it) is key.
+- Support it with your king and other pieces.
+
+4. Basic Checkmates:
+- King + Queen vs. King: Use your queen to cut off escape squares and force the enemy king to the edge.
+- King + Rook vs. King: Use the "box method" to limit the enemy king's movement.
+
+5. Triangulation:
+- A technique where the king moves in a triangle to pass the move to the opponent.
+- Useful in king and pawn endgames.
+`,
+  },
+  {
+    title: "Advanced Opening Concepts",
+    content: `Beyond basic openings, advanced players focus on subtle improvements.
+
+1. Pawn Breaks:
+- Used to open lines for pieces or create weaknesses in the opponent's position.
+- Example: d4-d5 in many openings.
+
+2. Opening Theory:
+- Understanding main variations of openings and their typical middle-game plans.
+- Examples:
+- Sicilian Defense (1. e4 c5)
+- Ruy-Lopez (1. e4 e5 2. Nf3 Nc6 3. Bb5)
+
+3. Hypermodern Openings:
+- Allowing the opponent to take the center and attacking it from the sides.
+- Examples:
+- King's Indian Defense
+- Nimzo-Indian Defense
+
+4. Gambits:
+- Sacrificing material for rapid development or an attack.
+- Examples:
+- Queen's Gambit (1. d4 d5 2. c4)
+- King's Gambit (1. e4 e5 2. f4)
+`,
+  },
+],
 };
 
 const LessonsPage = () => {
@@ -94,7 +252,7 @@ const LessonsPage = () => {
           ⬅ Home
         </button>
         <div className="flex space-x-4">
-          {["All", "Beginner", "Intermediate", "Advanced"].map((level) => (
+          {["Beginner", "Intermediate", "Advanced"].map((level) => (
             <button
               key={level}
               className={`p-2 rounded-md transition ${

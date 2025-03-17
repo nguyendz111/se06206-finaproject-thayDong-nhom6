@@ -2,11 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import Board from "../components/Board";
-
-import SigninForm from "../pages/SigninPage"; 
-
 import SigninForm from "../pages/SigninPage";
-
 import SignupForm from "../pages/SignupPage";
 
 function AppRoutes({ onGameOver, gameOver, winner }) {

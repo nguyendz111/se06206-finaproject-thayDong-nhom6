@@ -74,7 +74,7 @@ const Board = () => {
                     col={colIndex}
                     piece={piece}
                     isBlack={(rowIndex + colIndex) % 2 === 1}
-                    isHighlighted={possibleMoves.some(move => move[0] === rowIndex && move[1] === colIndex)}
+isHighlighted={possibleMoves.some(move => move[0] === rowIndex && move[1] === colIndex)}
                     onClick={handleSquareClick}
                   />
                 ))}

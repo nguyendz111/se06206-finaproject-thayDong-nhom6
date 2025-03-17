@@ -63,7 +63,7 @@ const SigninForm = () => {
       <div className="bg-gray-900 text-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
         <div className="text-center mb-6">
           <span className="text-4xl">♟️</span>
-          <h2 className="text-2xl font-bold mt-2">Sign In to Chess Master</h2>
+          <h2 className="text-2xl font-bold mt-2">Sign In to ChessPlayer</h2>
         </div>
 
         {/* Hiển thị lỗi nếu có */}

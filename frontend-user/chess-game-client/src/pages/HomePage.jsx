@@ -1,30 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
+import { ThemeLanguageContext } from "../context/ThemeLanguageContext"; // Import Context
 import { FaChess, FaPuzzlePiece, FaGraduationCap, FaComments, FaUsers, FaBars, FaSignInAlt, FaSun, FaMoon, FaGlobe } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const { language, setLanguage, theme, setTheme } = useContext(ThemeLanguageContext);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [language, setLanguage] = useState(localStorage.getItem("language") || "en");
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   // Cập nhật class của HTML theo theme
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
-    localStorage.setItem("theme", theme);
   }, [theme]);
 
   // Đổi ngôn ngữ
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "en" ? "vi" : "en"));
-    localStorage.setItem("language", language === "en" ? "vi" : "en");
-  };
+  const toggleLanguage = () => setLanguage(language === "en" ? "vi" : "en");
 
   // Đổi theme Light/Dark
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "light" ? "dark" : "light"));
-  };
+  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
   const menuItems = [
     { name: language === "en" ? "Play Online" : "Chơi Online", icon: <FaChess />, path: "/game" },

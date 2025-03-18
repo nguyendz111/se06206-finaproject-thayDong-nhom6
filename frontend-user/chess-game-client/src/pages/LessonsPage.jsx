@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 
 // Import hình ảnh từ thư mục assets/images
 import chessboardImage from "../assets/images/chessboard.png";
@@ -241,13 +242,14 @@ Advanced: [
 
 const LessonsPage = () => {
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext); // Lấy trạng thái theme từ context
   const [selectedLevel, setSelectedLevel] = useState("Beginner");
   const [activeLesson, setActiveLesson] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Navbar ngang */}
-      <div className="w-full bg-red-700 text-white flex justify-between items-center p-4 fixed top-0 left-0 z-10">
+    <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
+      {/* Navbar */}
+      <div className={`w-full ${theme === "dark" ? "bg-red-800" : "bg-red-700"} text-white flex justify-between items-center p-4 fixed top-0 left-0 z-10`}>
         <button onClick={() => navigate("/")} className="text-lg font-bold hover:bg-red-600 p-2 rounded-md">
           ⬅ Home
         </button>
@@ -271,20 +273,30 @@ const LessonsPage = () => {
 
       {/* Nội dung bài học */}
       <div className="pt-20 p-6">
-        <h1 className="text-3xl font-bold text-red-700 text-center mb-6">Chess Lessons</h1>
+        <h1 className={`text-3xl font-bold ${theme === "dark" ? "text-red-400" : "text-red-700"} text-center mb-6`}>
+          Chess Lessons
+        </h1>
 
         {lessons[selectedLevel]?.map((lesson, index) => (
           <div key={index} className="mb-4">
             <button
-              className="w-full text-left p-3 bg-gray-300 rounded-lg shadow hover:bg-gray-400 transition duration-200"
+              className={`w-full text-left p-3 rounded-lg shadow transition duration-200 ${
+                theme === "dark" ? "bg-gray-700 text-white hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-400"
+              }`}
               onClick={() => setActiveLesson(activeLesson === index ? null : index)}
             >
               {lesson.title}
             </button>
 
             {activeLesson === index && (
-              <div className="mt-2 p-4 bg-white border-l-4 border-red-600 rounded-lg">
-                <p className="text-gray-700 whitespace-pre-line">{lesson.content}</p>
+              <div
+                className={`mt-2 p-4 border-l-4 rounded-lg ${
+                  theme === "dark" ? "bg-gray-800 border-red-500" : "bg-white border-red-600"
+                }`}
+              >
+                <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-700"} whitespace-pre-line`}>
+                  {lesson.content}
+                </p>
 
                 {lesson.image && (
                   <div className="mt-4 flex justify-center">
@@ -294,9 +306,9 @@ const LessonsPage = () => {
 
                 {lesson.subLessons &&
                   lesson.subLessons.map((sub, subIndex) => (
-                    <div key={subIndex} className="mt-4 p-4 bg-gray-100 rounded-lg">
+                    <div key={subIndex} className={`mt-4 p-4 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
                       <h3 className="text-lg font-bold">{sub.name}</h3>
-                      <p className="text-gray-700">{sub.description}</p>
+                      <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>{sub.description}</p>
                       {sub.image && (
                         <div className="mt-2 flex justify-center">
                           <img src={sub.image} alt={sub.name} className="w-full max-w-md border rounded-lg" />

@@ -13,7 +13,7 @@ function App() {
   };
 
   return (
-    <ThemeLanguageProvider> {/* Bọc toàn bộ ứng dụng với Theme & Language */}
+    <ThemeLanguageProvider>
       <Router>
         <Routes>
           <Route

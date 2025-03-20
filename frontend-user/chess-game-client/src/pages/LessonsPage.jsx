@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeLanguageContext } from "../context/ThemeLanguageContext";
 
 // Import hình ảnh từ thư mục assets/images
 import chessboardImage from "../assets/images/chessboard.png";
@@ -15,14 +15,15 @@ const lessons = {
   Beginner: [
     {
       title: "Introduction to the Chessboard and Pieces",
-      content: `The Chessboard Setup
+      content: `
+The Chessboard Setup:
 The chessboard consists of 64 squares (8x8 grid), alternating between light and dark colors.
 
 Key Points about the Chessboard:
-- The **bottom-right square must be light.
+- The **bottom-right square** must be light.
 - The board is labeled using files (a-h) and ranks (1-8).
 - White starts the game.
-  
+
 Chess Pieces and Their Initial Positions:
 - Each player starts with 16 pieces:  
   - 1 King, 1 Queen, 2 Rooks, 2 Bishops, 2 Knights, 8 Pawns.
@@ -32,13 +33,13 @@ Chess Pieces and Their Initial Positions:
   - Bishops next to the knights.  
   - Queen on her color (White Queen on white square, Black Queen on black square).  
   - King next to the queen.  
-  - Pawns occupy the entire second rank.  
-`,
+  - Pawns occupy the entire second rank.
+      `,
       image: chessboardImage,
     },
     {
       title: "How Chess Pieces Move",
-      content: `How Each Piece Moves`,
+      content: "How Each Piece Moves",
       subLessons: [
         { name: "King", description: "Moves one square in any direction.", image: kingMoveImage },
         { name: "Queen", description: "Moves any number of squares in any direction.", image: queenMoveImage },
@@ -50,41 +51,42 @@ Chess Pieces and Their Initial Positions:
     },
     {
       title: "Basic Chess Concepts",
-      content: `1. Objective of Chess
-The goal in chess is to checkmate your opponent’s king. Checkmate happens when the king is under attack and cannot escape.
+      content: `
+1. **Objective of Chess**  
+   The goal in chess is to checkmate your opponent’s king. Checkmate happens when the king is under attack and cannot escape.
 
-2. Chess Notation
-Chess moves are recorded using algebraic notation, where:
-- Each file (column) is labeled a-h.
-- Each rank (row) is labeled 1-8.
-- Example move: e4 means moving a piece to e4.
+2. **Chess Notation**  
+   Chess moves are recorded using algebraic notation, where:  
+   - Each file (column) is labeled a-h.  
+   - Each rank (row) is labeled 1-8.  
+   - Example move: e4 means moving a piece to e4.
 
-3. Piece Values
-Each piece has a general point value:
-- Pawn = 1
-- Knight = 3
-- Bishop = 3
-- Rook = 5
-- Queen = 9
-- King = Priceless (cannot be lost)
+3. **Piece Values**  
+   Each piece has a general point value:  
+   - Pawn = 1  
+   - Knight = 3  
+   - Bishop = 3  
+   - Rook = 5  
+   - Queen = 9  
+   - King = Priceless (cannot be lost)
 
-4. Control the Center
-- The center squares (d4, d5, e4, e5) are the most important.
-- Placing pawns and pieces here gives you more mobility.
+4. **Control the Center**  
+   - The center squares (d4, d5, e4, e5) are the most important.  
+   - Placing pawns and pieces here gives you more mobility.
 
-5. Basic Opening Principles
-- Control the center early (e4, d4, c4, or Nf3).
-- Develop knights and bishops before moving the queen.
-- Castle early to protect the king.
-- Avoid moving the same piece multiple times in the opening.
-`,
-},
-],
+5. **Basic Opening Principles**  
+   - Control the center early (e4, d4, c4, or Nf3).  
+   - Develop knights and bishops before moving the queen.  
+   - Castle early to protect the king.  
+   - Avoid moving the same piece multiple times in the opening.
+      `,
+    },
+  ],
 
-Intermediate: [
-  {
-    title: "Tactical Motifs in Chess",
-    content: `Common tactical patterns help players gain an advantage:
+  Intermediate: [
+    {
+      title: "Tactical Motifs in Chess",
+      content: `Common tactical patterns help players gain an advantage:
 
 1. Forks:
 - A single piece attacks two or more enemy pieces at the same time.
@@ -109,10 +111,10 @@ Intermediate: [
 6. Deflection and Decoy:
 - Forcing an opponent's piece away from a key square.
 `,
-  },
-  {
-    title: "Positional Play",
-    content: `Unlike tactics, positional play focuses on long-term advantages.
+    },
+    {
+      title: "Positional Play",
+      content: `Unlike tactics, positional play focuses on long-term advantages.
 
 1. Piece Activity:
 - Knights and bishops should be placed where they control many squares.
@@ -134,60 +136,13 @@ Intermediate: [
 - Having more space allows for better maneuvering.
 - Controlling the center gives you more space to move.
 `,
-  },
-],
+    },
+  ],
 
-Advanced: [
-  {
-    title: "Advanced Opening Concepts",
-    content: `Beyond basic openings, advanced players focus on deeper strategic ideas.
-  
-  1. Pawn Breaks:
-  - Main idea: Break the pawn structure to activate pieces.
-  - Example: The d4-d5 push in many openings.
-  - Used in openings like the Sicilian Defense (c5 break) or the French Defense (e6-d5 break).
-  
-  2. Opening Theory:
-  - Mastering common variations provides an advantage.
-  - Popular openings:
-    - Sicilian Defense (1. e4 c5): Sharp playstyle, strong counterattack.
-    - Ruy-Lopez (1. e4 e5 2. Nf3 Nc6 3. Bb5): Well-structured development with deep tactical play.
-    - French Defense (1. e4 e6): Solid but leads to a closed position.
-  
-  3. Modern Openings:
-  - Instead of directly controlling the center with pawns, these openings allow the opponent to occupy the center first and then attack.
-  - Examples:
-    - King's Indian Defense (1. d4 Nf6 2. c4 g6)
-    - Nimzo-Indian Defense (1. d4 Nf6 2. c4 e6 3. Nc3 Bb4)
-    - Pirc Defense (1. e4 d6 2. d4 Nf6 3. Nc3 g6)
-  
-  4. Gambits (Sacrificing Material for Initiative):
-  - A gambit sacrifices one or more pawns to gain development or attacking chances.
-  - Examples:
-    - Queen’s Gambit (1. d4 d5 2. c4): White sacrifices a pawn to control the center.
-    - King’s Gambit (1. e4 e5 2. f4): White plays aggressively, sacrificing the f4 pawn.
-    - Danish Gambit (1. e4 e5 2. d4 exd4 3. c3): White sacrifices two pawns for rapid piece development.
-  
-  5. Opening Traps:
-  - Some traps can win material early in the game.
-  - Example: Fool’s Mate (1. f3 e5 2. g4 Qh4#) - The fastest checkmate in chess.
-  - Example: Scholar’s Mate (1. e4 e5 2. Qh5 Nc6 3. Bc4 Nf6 4. Qxf7#).
-  
-  6. Opening Transpositions:
-  - Many openings can lead to similar middlegame positions through different move orders.
-  - Example: King's Indian Defense can transpose into Grünfeld Defense or Benoni Defense.
-  
-  7. Choosing Openings Based on Playstyle:
-  - Aggressive attackers: Sicilian Defense, King’s Gambit, Danish Gambit.
-  - Positional players: Queen’s Gambit, Caro-Kann, English Opening.
-  - Counterattackers: King’s Indian, Pirc Defense, Benoni Defense.
-
-  `},
-  
-  
-  {
-    title: "Endgame Fundamentals",
-    content: `Mastering the endgame is crucial for winning close games.
+  Advanced: [
+    {
+      title: "Endgame Fundamentals",
+      content: `Mastering the endgame is crucial for winning close games.
 
 1. King Activity:
 - The king is a powerful piece in the endgame.
@@ -209,10 +164,10 @@ Advanced: [
 - A technique where the king moves in a triangle to pass the move to the opponent.
 - Useful in king and pawn endgames.
 `,
-  },
-  {
-    title: "Advanced Opening Concepts",
-    content: `Beyond basic openings, advanced players focus on subtle improvements.
+    },
+    {
+      title: "Advanced Opening Concepts",
+      content: `Beyond basic openings, advanced players focus on subtle improvements.
 
 1. Pawn Breaks:
 - Used to open lines for pieces or create weaknesses in the opponent's position.
@@ -221,35 +176,36 @@ Advanced: [
 2. Opening Theory:
 - Understanding main variations of openings and their typical middle-game plans.
 - Examples:
-- Sicilian Defense (1. e4 c5)
-- Ruy-Lopez (1. e4 e5 2. Nf3 Nc6 3. Bb5)
+  - Sicilian Defense (1. e4 c5)
+  - Ruy-Lopez (1. e4 e5 2. Nf3 Nc6 3. Bb5)
 
 3. Hypermodern Openings:
 - Allowing the opponent to take the center and attacking it from the sides.
 - Examples:
-- King's Indian Defense
-- Nimzo-Indian Defense
+  - King's Indian Defense
+  - Nimzo-Indian Defense
 
 4. Gambits:
 - Sacrificing material for rapid development or an attack.
 - Examples:
-- Queen's Gambit (1. d4 d5 2. c4)
-- King's Gambit (1. e4 e5 2. f4)
+  - Queen's Gambit (1. d4 d5 2. c4)
+  - King's Gambit (1. e4 e5 2. f4)
 `,
-  },
-],
+    },
+  ],
 };
+
 
 const LessonsPage = () => {
   const navigate = useNavigate();
-  const { theme } = useContext(ThemeContext); // Lấy trạng thái theme từ context
+  const { theme } = useContext(ThemeLanguageContext); // Lấy theme từ context
   const [selectedLevel, setSelectedLevel] = useState("Beginner");
   const [activeLesson, setActiveLesson] = useState(null);
 
   return (
     <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
       {/* Navbar */}
-      <div className={`w-full ${theme === "dark" ? "bg-red-800" : "bg-red-700"} text-white flex justify-between items-center p-4 fixed top-0 left-0 z-10`}>
+      <div className="w-full bg-red-700 text-white flex justify-between items-center p-4 fixed top-0 left-0 z-10">
         <button onClick={() => navigate("/")} className="text-lg font-bold hover:bg-red-600 p-2 rounded-md">
           ⬅ Home
         </button>
@@ -273,15 +229,13 @@ const LessonsPage = () => {
 
       {/* Nội dung bài học */}
       <div className="pt-20 p-6">
-        <h1 className={`text-3xl font-bold ${theme === "dark" ? "text-red-400" : "text-red-700"} text-center mb-6`}>
-          Chess Lessons
-        </h1>
+        <h1 className="text-3xl font-bold text-red-700 text-center mb-6">Chess Lessons</h1>
 
         {lessons[selectedLevel]?.map((lesson, index) => (
           <div key={index} className="mb-4">
             <button
               className={`w-full text-left p-3 rounded-lg shadow transition duration-200 ${
-                theme === "dark" ? "bg-gray-700 text-white hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-400"
+                theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-400"
               }`}
               onClick={() => setActiveLesson(activeLesson === index ? null : index)}
             >
@@ -291,12 +245,10 @@ const LessonsPage = () => {
             {activeLesson === index && (
               <div
                 className={`mt-2 p-4 border-l-4 rounded-lg ${
-                  theme === "dark" ? "bg-gray-800 border-red-500" : "bg-white border-red-600"
+                  theme === "dark" ? "bg-gray-800 border-red-400" : "bg-white border-red-600"
                 }`}
               >
-                <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-700"} whitespace-pre-line`}>
-                  {lesson.content}
-                </p>
+                <p className="whitespace-pre-line">{lesson.content}</p>
 
                 {lesson.image && (
                   <div className="mt-4 flex justify-center">
@@ -308,7 +260,7 @@ const LessonsPage = () => {
                   lesson.subLessons.map((sub, subIndex) => (
                     <div key={subIndex} className={`mt-4 p-4 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
                       <h3 className="text-lg font-bold">{sub.name}</h3>
-                      <p className={`${theme === "dark" ? "text-gray-300" : "text-gray-700"}`}>{sub.description}</p>
+                      <p>{sub.description}</p>
                       {sub.image && (
                         <div className="mt-2 flex justify-center">
                           <img src={sub.image} alt={sub.name} className="w-full max-w-md border rounded-lg" />

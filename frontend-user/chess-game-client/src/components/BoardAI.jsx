@@ -26,6 +26,7 @@ const BoardAI = () => {
   const [winner, setWinner] = useState(null);
   const [isAIThinking, setIsAIThinking] = useState(false);
   const [capturedPieces, setCapturedPieces] = useState({ white: [], black: [] });
+  const [difficulty, setDifficulty] = useState("medium"); // Mặc định là Trung Bình
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -145,6 +146,18 @@ const BoardAI = () => {
         <button className="restart-button" onClick={() => window.location.reload()}>
           Play Again?
         </button>
+        <div className="difficulty-select">
+  <label htmlFor="difficulty">Select Difficulty: </label>
+  <select
+    id="difficulty"
+    value={difficulty}
+    onChange={(e) => setDifficulty(e.target.value)}
+  >
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+</div>
       </div>
 
       {/* Hiển thị quân cờ bị ăn bởi quân đen (quân trắng bị mất) */}

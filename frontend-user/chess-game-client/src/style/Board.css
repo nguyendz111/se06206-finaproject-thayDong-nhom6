@@ -222,3 +222,40 @@
     opacity: 1;
   }
 }
+.difficulty-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.difficulty-select label {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.difficulty-select select {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.difficulty-select select:hover {
+  border-color: #007bff;
+}
+
+.difficulty-select select:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}

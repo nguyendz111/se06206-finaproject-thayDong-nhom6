@@ -1,4 +1,4 @@
-package com.chessgame;
+package com.btec;
 
 public class WebShotket {
     

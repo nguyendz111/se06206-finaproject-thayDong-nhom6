@@ -9,16 +9,19 @@ const pieceValues = {
   king: 1000,
 };
 
+// Bộ nhớ đệm cho Alpha-Beta Pruning
+const transpositionTable = new Map();
+
 export function getBestMove(board, color, difficulty = "medium") {
   let bestMove = null;
   let bestValue = -Infinity;
 
   const possibleMoves = getAllPossibleMoves(board, color);
-  const depth = getDepthByDifficulty(difficulty);
+  const depth = getDepthByDifficulty(difficulty, board);
 
   for (let move of possibleMoves) {
     const newBoard = makeMove(board, move);
-    let moveValue = minimax(newBoard, depth, false, color);
+    const moveValue = minimax(newBoard, depth, false, color, -Infinity, Infinity);
 
     if (moveValue > bestValue) {
       bestValue = moveValue;
@@ -28,24 +31,30 @@ export function getBestMove(board, color, difficulty = "medium") {
   return bestMove;
 }
 
+// Lấy tất cả các nước đi hợp lệ
 function getAllPossibleMoves(board, color) {
-  let moves = [];
+  const moves = [];
   for (let row = 0; row < 8; row++) {
     for (let col = 0; col < 8; col++) {
-      let piece = board[row][col];
+      const piece = board[row][col];
       if (piece && piece.endsWith(`_${color}`)) {
-        let [type] = piece.split("_");
-        let possibleMoves = getPossibleMovesForPiece(
+        const [type] = piece.split("_");
+        const possibleMoves = getPossibleMovesForPiece(
           { type, color },
           [row, col],
           board
         );
         for (let move of possibleMoves) {
-          moves.push({ from: [row, col], to: move });
+          const isCapture = board[move[0]][move[1]] !== "";
+          moves.push({ from: [row, col], to: move, isCapture });
         }
       }
     }
   }
+
+  // Move Ordering: Ưu tiên nước bắt quân
+  moves.sort((a, b) => (b.isCapture ? 1 : 0) - (a.isCapture ? 1 : 0));
+
   return moves;
 }
 
@@ -56,23 +65,46 @@ function makeMove(board, move) {
   return newBoard;
 }
 
-function minimax(board, depth, isMaximizing, color) {
+// Alpha-Beta Pruning + Move Ordering
+function minimax(board, depth, isMaximizing, color, alpha, beta) {
+  const boardHash = JSON.stringify(board);
+  if (transpositionTable.has(boardHash)) {
+    return transpositionTable.get(boardHash);
+  }
+
   if (depth === 0) return evaluateBoard(board, color);
 
-  let bestValue = isMaximizing ? -Infinity : Infinity;
   const opponentColor = color === "w" ? "b" : "w";
   const possibleMoves = getAllPossibleMoves(board, isMaximizing ? color : opponentColor);
 
-  for (let move of possibleMoves) {
-    const newBoard = makeMove(board, move);
-    const value = minimax(newBoard, depth - 1, !isMaximizing, color);
-    bestValue = isMaximizing
-      ? Math.max(bestValue, value)
-      : Math.min(bestValue, value);
+  if (possibleMoves.length === 0) return evaluateBoard(board, color);
+
+  if (isMaximizing) {
+    let maxEval = -Infinity;
+    for (let move of possibleMoves) {
+      const newBoard = makeMove(board, move);
+      const evalScore = minimax(newBoard, depth - 1, false, color, alpha, beta);
+      maxEval = Math.max(maxEval, evalScore);
+      alpha = Math.max(alpha, evalScore);
+      if (beta <= alpha) break; // Cắt tỉa
+    }
+    transpositionTable.set(boardHash, maxEval);
+    return maxEval;
+  } else {
+    let minEval = Infinity;
+    for (let move of possibleMoves) {
+      const newBoard = makeMove(board, move);
+      const evalScore = minimax(newBoard, depth - 1, true, color, alpha, beta);
+      minEval = Math.min(minEval, evalScore);
+      beta = Math.min(beta, evalScore);
+      if (beta <= alpha) break; // Cắt tỉa
+    }
+    transpositionTable.set(boardHash, minEval);
+    return minEval;
   }
-  return bestValue;
 }
 
+// Đánh giá bàn cờ
 function evaluateBoard(board, color) {
   let score = 0;
   for (let row of board) {
@@ -87,15 +119,19 @@ function evaluateBoard(board, color) {
   return score;
 }
 
-function getDepthByDifficulty(difficulty) {
-  switch (difficulty) {
-    case "easy":
-      return 1;
-    case "medium":
-      return 3;
-    case "hard":
-      return 5;
-    default:
-      return 3;
+// Độ sâu thích ứng dựa trên số quân
+function getDepthByDifficulty(difficulty, board) {
+  const pieceCount = board.flat().filter((piece) => piece !== "").length;
+
+  if (difficulty === "easy") return 1;
+
+  if (difficulty === "medium") return pieceCount > 20 ? 3 : 4;
+
+  if (difficulty === "hard") {
+    if (pieceCount > 24) return 3; // Mở đầu
+    if (pieceCount > 16) return 4; // Giữa trận
+    return 5; // Cuối trận
   }
+
+  return 3; // Mặc định Medium
 }

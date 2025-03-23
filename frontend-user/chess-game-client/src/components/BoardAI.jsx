@@ -26,8 +26,14 @@ const BoardAI = () => {
   const [winner, setWinner] = useState(null);
   const [isAIThinking, setIsAIThinking] = useState(false);
   const [capturedPieces, setCapturedPieces] = useState({ white: [], black: [] });
-  const [difficulty, setDifficulty] = useState("medium"); // Mặc định là Trung Bình
+  const [difficulty, setDifficulty] = useState(localStorage.getItem("difficulty") || "medium"); // Lấy từ LocalStorage
   const navigate = useNavigate();
+
+  // Lưu độ khó vào LocalStorage và reset game bằng reload
+  const resetGameWithDifficulty = (newDifficulty) => {
+    localStorage.setItem("difficulty", newDifficulty);
+    window.location.reload(); // Giữ hiệu ứng reload như cũ
+  };
 
   useEffect(() => {
     if (turn === "b" && !winner) {
@@ -37,7 +43,7 @@ const BoardAI = () => {
         setIsAIThinking(false);
       }, 2000);
     }
-  }, [turn]);
+  }, [turn, difficulty]);
 
   const handleSquareClick = (row, col) => {
     if (winner || turn === "b") return;
@@ -67,13 +73,13 @@ const BoardAI = () => {
         }));
       }
 
-      newBoard[row][col] = selectedPiece;
-      newBoard[selectedPosition[0]][selectedPosition[1]] = "";
-
-      if (capturedPiece.includes("king")) {
+      if (capturedPiece && capturedPiece.includes("king")) {
         setWinner(turn === "w" ? "White wins!" : "Black wins!");
         return;
       }
+
+      newBoard[row][col] = selectedPiece;
+      newBoard[selectedPosition[0]][selectedPosition[1]] = "";
 
       setBoard(newBoard);
       setTurn("b");
@@ -84,9 +90,9 @@ const BoardAI = () => {
   };
 
   const handleAIMove = () => {
-    const bestMove = getBestMove(board, "b");
+    const bestMove = getBestMove(board, "b", difficulty);
     if (!bestMove || !bestMove.from || !bestMove.to) return;
-
+  
     const newBoard = board.map(r => [...r]);
     const { from, to } = bestMove;
     const capturedPiece = newBoard[to[0]][to[1]];
@@ -99,7 +105,7 @@ const BoardAI = () => {
       }));
     }
 
-    if (newBoard[to[0]][to[1]].includes("king")) {
+    if (capturedPiece && capturedPiece.includes("king")) {
       setWinner("Black wins!");
       return;
     }
@@ -113,7 +119,6 @@ const BoardAI = () => {
 
   return (
     <div className="game-container">
-      {/* Hiển thị quân cờ bị ăn bởi quân trắng (quân đen bị mất) */}
       <div className="captured-pieces captured-black">
         {capturedPieces.white.map((piece, index) => (
           <img key={index} src={require(`../assets/images/${piece}.png`)} alt={piece} className="captured-piece" />
@@ -123,6 +128,7 @@ const BoardAI = () => {
       <div className="board-wrapper">
         <div className="board-content">
           <h2>Play: {turn === "w" ? "White" : "Black"}</h2>
+          <h3>Difficulty: {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}</h3>
           {isAIThinking && <p className="text-yellow-500">AI is thinking...</p>}
           <div className="board-container">
             {board.map((row, rowIndex) => (
@@ -143,24 +149,26 @@ const BoardAI = () => {
           </div>
         </div>
 
-        <button className="restart-button" onClick={() => window.location.reload()}>
+        {/* Nút chơi lại */}
+        <button className="restart-button" onClick={() => resetGameWithDifficulty(difficulty)}>
           Play Again?
         </button>
+
+        {/* Chọn độ khó */}
         <div className="difficulty-select">
-  <label htmlFor="difficulty">Select Difficulty: </label>
-  <select
-    id="difficulty"
-    value={difficulty}
-    onChange={(e) => setDifficulty(e.target.value)}
-  >
-    <option value="easy">Easy</option>
-    <option value="medium">Medium</option>
-    <option value="hard">Hard</option>
-  </select>
-</div>
+          <label htmlFor="difficulty">Select Difficulty: </label>
+          <select
+            id="difficulty"
+            value={difficulty}
+            onChange={(e) => resetGameWithDifficulty(e.target.value)}
+          >
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
       </div>
 
-      {/* Hiển thị quân cờ bị ăn bởi quân đen (quân trắng bị mất) */}
       <div className="captured-pieces captured-white">
         {capturedPieces.black.map((piece, index) => (
           <img key={index} src={require(`../assets/images/${piece}.png`)} alt={piece} className="captured-piece" />
@@ -174,7 +182,6 @@ const BoardAI = () => {
           </div>
         </div>
       )}
-      
     </div>
   );
 };

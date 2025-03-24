@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import "../App.css";
-import { getPossibleMovesForPiece } from "../utils/chessLogic";
-import Square from "./Square";
 import { useNavigate } from "react-router-dom";
 import "../style/Board.css";
 import playerIcon from "../assets/images/hand-chess.png";
 import aiIcon from "../assets/images/computer-icon.png";
+import Sidebar from "../components/SideBar"; // Import Sidebar
+import Square from "./Square";
+import { getPossibleMovesForPiece } from "../utils/chessLogic";
 
 const initialBoard = [
   ["rook_b", "knight_b", "bishop_b", "queen_b", "king_b", "bishop_b", "knight_b", "rook_b"],
@@ -61,6 +61,8 @@ const Board = () => {
 
   return (
     <div className="game-container">
+      <Sidebar /> {/* Hiển thị Sidebar bên trái */}
+
       <div className="board-wrapper">
         <div className="board-content">
           <h2>Play: {turn === "w" ? "White" : "Black"}</h2>

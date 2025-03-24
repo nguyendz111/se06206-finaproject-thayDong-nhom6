@@ -1,0 +1,107 @@
+/* Căn chỉnh toàn bộ trang */
+.puzzles-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  height: 100vh;
+  background-color: #f0f0f0; /* Màu nền nhạt */
+  padding: 20px;
+}
+
+/* Khu vực bàn cờ */
+.puzzle-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #d2b48c; /* Màu gỗ */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Bàn cờ */
+.board-container {
+  display: inline-block;
+  border: 10px solid #8b4513; /* Viền bàn cờ màu nâu */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Ô cờ */
+.row {
+  display: flex;
+}
+
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.white-square {
+  background-color: #f0d9b5;
+}
+
+.black-square {
+  background-color: #b58863;
+}
+
+/* Hộp chứa danh sách câu đố */
+.puzzles-box {
+  width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+
+  /* Đưa hộp sang bên phải và căn giữa theo chiều dọc */
+  position: absolute;
+  right: 18%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+/* Tiêu đề "Puzzles" */
+.puzzles-box h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Thanh chọn độ khó */
+.difficulty-select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+/* Danh sách câu đố */
+.puzzle-list {
+  list-style: none;
+  padding: 0;
+}
+
+.puzzle-item {
+  background: #ececec;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.puzzle-item:hover {
+  background: #d6d6d6;
+  transform: scale(1.05);
+}

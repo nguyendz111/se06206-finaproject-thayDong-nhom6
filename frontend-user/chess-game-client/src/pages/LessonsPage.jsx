@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import SideBar from "../components/SideBar"; // Import SideBar đã có
 import { ThemeLanguageContext } from "../context/ThemeLanguageContext";
 
 // Import hình ảnh từ thư mục assets/images
@@ -197,18 +197,14 @@ Chess Pieces and Their Initial Positions:
 
 
 const LessonsPage = () => {
-  const navigate = useNavigate();
-  const { theme } = useContext(ThemeLanguageContext); // Lấy theme từ context
+  const { theme } = useContext(ThemeLanguageContext);
   const [selectedLevel, setSelectedLevel] = useState("Beginner");
   const [activeLesson, setActiveLesson] = useState(null);
 
   return (
-    <div className={`min-h-screen ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
-      {/* Navbar */}
-      <div className="w-full bg-red-700 text-white flex justify-between items-center p-4 fixed top-0 left-0 z-10">
-        <button onClick={() => navigate("/")} className="text-lg font-bold hover:bg-red-600 p-2 rounded-md">
-          ⬅ Home
-        </button>
+    <div className={`min-h-screen flex flex-col ${theme === "dark" ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}>
+      {/* Sidebar ngang + Mục chọn level */}
+      <div className={`w-full ${theme === "dark" ? "bg-gray-800" : "bg-red-700"} text-white p-4 flex justify-center`}>
         <div className="flex space-x-4">
           {["Beginner", "Intermediate", "Advanced"].map((level) => (
             <button
@@ -227,51 +223,59 @@ const LessonsPage = () => {
         </div>
       </div>
 
-      {/* Nội dung bài học */}
-      <div className="pt-20 p-6">
-        <h1 className="text-3xl font-bold text-red-700 text-center mb-6">Chess Lessons</h1>
+      {/* Sidebar dọc + Nội dung bài học */}
+      <div className="flex relative">
+        {/* Sidebar dọc bên trái */}
+        <div className="fixed top-0 left-0 h-full w-64">
+          <SideBar />
+        </div>
 
-        {lessons[selectedLevel]?.map((lesson, index) => (
-          <div key={index} className="mb-4">
-            <button
-              className={`w-full text-left p-3 rounded-lg shadow transition duration-200 ${
-                theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-400"
-              }`}
-              onClick={() => setActiveLesson(activeLesson === index ? null : index)}
-            >
-              {lesson.title}
-            </button>
+        {/* Nội dung bài học */}
+        <div className="flex-1 p-6 ml-64"> {/* Thêm ml-64 để căn chỉnh nội dung chính */}
+          <h1 className="text-3xl font-bold text-red-700 text-center mb-6">Chess Lessons</h1>
 
-            {activeLesson === index && (
-              <div
-                className={`mt-2 p-4 border-l-4 rounded-lg ${
-                  theme === "dark" ? "bg-gray-800 border-red-400" : "bg-white border-red-600"
+          {lessons[selectedLevel]?.map((lesson, index) => (
+            <div key={index} className="mb-4">
+              <button
+                className={`w-full text-left p-3 rounded-lg shadow transition duration-200 ${
+                  theme === "dark" ? "bg-gray-700 hover:bg-gray-600" : "bg-gray-300 hover:bg-gray-400"
                 }`}
+                onClick={() => setActiveLesson(activeLesson === index ? null : index)}
               >
-                <p className="whitespace-pre-line">{lesson.content}</p>
+                {lesson.title}
+              </button>
 
-                {lesson.image && (
-                  <div className="mt-4 flex justify-center">
-                    <img src={lesson.image} alt="Chessboard" className="w-full max-w-md border rounded-lg" />
-                  </div>
-                )}
+              {activeLesson === index && (
+                <div
+                  className={`mt-2 p-4 border-l-4 rounded-lg ${
+                    theme === "dark" ? "bg-gray-800 border-red-400" : "bg-white border-red-600"
+                  }`}
+                >
+                  <p className="whitespace-pre-line">{lesson.content}</p>
 
-                {lesson.subLessons &&
-                  lesson.subLessons.map((sub, subIndex) => (
-                    <div key={subIndex} className={`mt-4 p-4 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
-                      <h3 className="text-lg font-bold">{sub.name}</h3>
-                      <p>{sub.description}</p>
-                      {sub.image && (
-                        <div className="mt-2 flex justify-center">
-                          <img src={sub.image} alt={sub.name} className="w-full max-w-md border rounded-lg" />
-                        </div>
-                      )}
+                  {lesson.image && (
+                    <div className="mt-4 flex justify-center">
+                      <img src={lesson.image} alt="Chessboard" className="w-full max-w-md border rounded-lg" />
                     </div>
-                  ))}
-              </div>
-            )}
-          </div>
-        ))}
+                  )}
+
+                  {lesson.subLessons &&
+                    lesson.subLessons.map((sub, subIndex) => (
+                      <div key={subIndex} className={`mt-4 p-4 rounded-lg ${theme === "dark" ? "bg-gray-700" : "bg-gray-100"}`}>
+                        <h3 className="text-lg font-bold">{sub.name}</h3>
+                        <p>{sub.description}</p>
+                        {sub.image && (
+                          <div className="mt-2 flex justify-center">
+                            <img src={sub.image} alt={sub.name} className="w-full max-w-md border rounded-lg" />
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

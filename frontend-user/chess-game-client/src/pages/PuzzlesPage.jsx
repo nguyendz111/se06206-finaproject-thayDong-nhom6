@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import "../style/Board.css"; // Sử dụng chung CSS với Board.jsx
+import "../style/PuzzlesPage.css"; 
 import Square from "../components/Square";
+import SideBar from "../components/SideBar"; // Import Sidebar
 
 const initialBoard = [
   ["rook_b", "knight_b", "bishop_b", "queen_b", "king_b", "bishop_b", "knight_b", "rook_b"],
@@ -14,7 +15,7 @@ const initialBoard = [
 ];
 
 const PuzzlesPage = () => {
-  const [board, setBoard] = useState(initialBoard);
+  const [board] = useState(initialBoard);
   const [difficulty, setDifficulty] = useState("All");
 
   const allPuzzles = [
@@ -32,9 +33,13 @@ const PuzzlesPage = () => {
 
   return (
     <div className="puzzles-container">
+      {/* SideBar */}
+      <SideBar />
+
+      {/* Nội dung chính */}
       <div className="puzzles-content">
-        {/* Bàn cờ */}
-        <div className="board-wrapper puzzle-mode">
+        {/* Bàn cờ bên trái */}
+        <div className="puzzle-board">
           <div className="board-container">
             {board.map((row, rowIndex) => (
               <div key={rowIndex} className="row">
@@ -45,7 +50,7 @@ const PuzzlesPage = () => {
                     col={colIndex}
                     piece={piece}
                     isBlack={(rowIndex + colIndex) % 2 === 1}
-                    onClick={() => {}} // Không cần xử lý click như trong game
+                    onClick={() => {}} 
                   />
                 ))}
               </div>
@@ -53,7 +58,7 @@ const PuzzlesPage = () => {
           </div>
         </div>
 
-        {/* Danh sách câu đố */}
+        {/* Hộp chứa danh sách câu đố bên phải */}
         <div className="puzzles-box">
           <h2>Puzzles</h2>
 

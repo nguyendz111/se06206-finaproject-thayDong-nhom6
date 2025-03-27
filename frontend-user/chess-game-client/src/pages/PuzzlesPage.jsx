@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import "../style/PuzzlesPage.css"; 
+import React, { useState, useContext } from "react";
+import "../style/PuzzlesPage.css";
 import Square from "../components/Square";
-import SideBar from "../components/SideBar"; // Import Sidebar
-import { getPossibleMovesForPiece } from "../utils/chessLogic"; // Import logic nước đi
+import SideBar from "../components/SideBar"; // Sidebar
+import { getPossibleMovesForPiece } from "../utils/chessLogic"; // Logic nước đi
+import { ThemeLanguageContext } from "../context/ThemeLanguageContext"; // Import Context
 
-// Dữ liệu các thế cờ cho từng câu đố
+// Dữ liệu thế cờ cho từng câu đố
 const puzzleBoards = {
   1: [ // Fool’s Mate
     ["rook_b", "knight_b", "bishop_b", "queen_b", "king_b", "bishop_b", "knight_b", "rook_b"],
@@ -39,13 +40,15 @@ const puzzleBoards = {
 };
 
 const PuzzlesPage = () => {
+  const { theme, language } = useContext(ThemeLanguageContext);
   const [selectedPuzzle, setSelectedPuzzle] = useState(null);
   const [board, setBoard] = useState(Array(8).fill(Array(8).fill("")));
 
+  // Danh sách câu đố
   const allPuzzles = [
-    { id: 1, difficulty: "Easy", title: "Fool’s Mate" },
-    { id: 2, difficulty: "Medium", title: "Fork Attack" },
-    { id: 3, difficulty: "Hard", title: "Zugzwang Trap" },
+    { id: 1, difficulty: { en: "Easy", vi: "Dễ" }, title: { en: "Fool’s Mate", vi: "Chiếu Bí Nhanh" } },
+    { id: 2, difficulty: { en: "Medium", vi: "Trung Bình" }, title: { en: "Fork Attack", vi: "Đòn Chĩa" } },
+    { id: 3, difficulty: { en: "Hard", vi: "Khó" }, title: { en: "Zugzwang Trap", vi: "Bẫy Zugzwang" } },
   ];
 
   const handleSelectPuzzle = (puzzleId) => {
@@ -54,7 +57,7 @@ const PuzzlesPage = () => {
   };
 
   return (
-    <div className="puzzles-container">
+    <div className={`puzzles-container ${theme === "dark" ? "dark-theme" : "light-theme"}`}>
       {/* SideBar */}
       <SideBar />
 
@@ -91,7 +94,7 @@ const PuzzlesPage = () => {
 
         {/* Hộp chứa danh sách câu đố bên phải */}
         <div className="puzzles-box">
-          <h2>Puzzles</h2>
+          <h2>{language === "en" ? "Puzzles" : "Câu đố"}</h2>
 
           {/* Danh sách câu đố */}
           <ul className="puzzle-list">
@@ -101,7 +104,7 @@ const PuzzlesPage = () => {
                 className={`puzzle-item ${selectedPuzzle === puzzle.id ? "active" : ""}`}
                 onClick={() => handleSelectPuzzle(puzzle.id)}
               >
-                {puzzle.title} ({puzzle.difficulty})
+                {puzzle.title[language]} ({puzzle.difficulty[language]})
               </li>
             ))}
           </ul>

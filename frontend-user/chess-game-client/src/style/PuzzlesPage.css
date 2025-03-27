@@ -1,12 +1,24 @@
-/* Căn chỉnh toàn bộ trang */
+/* Áp dụng theme toàn trang */
 .puzzles-container {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
   height: 100vh;
-  background-color: #f0f0f0; /* Màu nền nhạt */
   padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light Theme */
+.puzzles-container.light {
+  background-color: #f0f0f0; /* Nền sáng */
+  color: black;
+}
+
+/* Dark Theme */
+.puzzles-container.dark {
+  background-color: #1a1a1a; /* Nền tối */
+  color: white;
 }
 
 /* Khu vực bàn cờ */
@@ -14,10 +26,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #d2b48c; /* Màu gỗ */
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s;
+}
+
+/* Light Theme */
+.puzzle-board.light {
+  background-color: #d2b48c; /* Màu gỗ */
+}
+
+/* Dark Theme */
+.puzzle-board.dark {
+  background-color: #4a3628; /* Tông màu tối hơn */
 }
 
 /* Bàn cờ */
@@ -42,35 +64,53 @@
   justify-content: center;
 }
 
-.white-square {
+/* Light Theme */
+.white-square.light {
   background-color: #f0d9b5;
 }
 
-.black-square {
+.black-square.light {
   background-color: #b58863;
+}
+
+/* Dark Theme */
+.white-square.dark {
+  background-color: #c9ab75;
+}
+
+.black-square.dark {
+  background-color: #815a3b;
 }
 
 /* Hộp chứa danh sách câu đố */
 .puzzles-box {
   width: 300px;
-  background: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   text-align: center;
-
-  /* Đưa hộp sang bên phải và căn giữa theo chiều dọc */
   position: absolute;
   right: 18%;
   top: 50%;
   transform: translateY(-50%);
+  transition: background-color 0.3s, color 0.3s;
 }
 
+/* Light Theme */
+.puzzles-box.light {
+  background: white;
+  color: black;
+}
+
+/* Dark Theme */
+.puzzles-box.dark {
+  background: #333;
+  color: white;
+}
 
 /* Tiêu đề "Puzzles" */
 .puzzles-box h2 {
   font-size: 24px;
-  color: #333;
   margin-bottom: 15px;
 }
 
@@ -92,7 +132,6 @@
 }
 
 .puzzle-item {
-  background: #ececec;
   padding: 10px;
   margin: 5px 0;
   border-radius: 5px;
@@ -101,7 +140,24 @@
   transition: 0.3s;
 }
 
-.puzzle-item:hover {
+/* Light Theme */
+.puzzle-item.light {
+  background: #ececec;
+  color: black;
+}
+
+.puzzle-item.light:hover {
   background: #d6d6d6;
+  transform: scale(1.05);
+}
+
+/* Dark Theme */
+.puzzle-item.dark {
+  background: #444;
+  color: white;
+}
+
+.puzzle-item.dark:hover {
+  background: #666;
   transform: scale(1.05);
 }

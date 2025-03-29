@@ -5,6 +5,7 @@ import BoardAI from "../components/BoardAI";
 import BoardOnline from "../components/BoardOnline";
 import SigninForm from "../pages/SigninPage";
 import SignupForm from "../pages/SignupPage";
+import CreateRoom from "../pages/CreateRoom"; // Import CreateRoom
 
 function AppRoutes() {
   const [gameOver, setGameOver] = useState(false);
@@ -18,18 +19,9 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      
-      {/* Chế độ chơi với máy */}
-      <Route
-        path="/game/ai"
-        element={
-          gameOver ? <h2 className="text-center">{winner} thắng!</h2> : <BoardAI onGameOver={handleGameOver} />
-        }
-      />
-
-      {/* Chế độ chơi online với người */}
+      <Route path="/game/ai" element={gameOver ? <h2 className="text-center">{winner} thắng!</h2> : <BoardAI onGameOver={handleGameOver} />} />
       <Route path="/game/online/:roomId" element={<BoardOnline onGameOver={handleGameOver} />} />
-
+      <Route path="/create-room" element={<CreateRoom />} />
       <Route path="/profile" element={<h2 className="text-center">Thông tin người chơi</h2>} />
       <Route path="/login" element={<SigninForm />} />
       <Route path="/signup" element={<SignupForm />} />

@@ -259,3 +259,21 @@
   border-color: #0056b3;
   box-shadow: 0 0 5px rgba(0,123,255,0.5);
 }
+.backhome-button {
+  position: fixed; /* Giữ cố định ở vị trí trên màn hình */
+  top: 10px;       /* Căn cách từ trên xuống 10px */
+  left: 10px;      /* Căn cách từ trái qua 10px */
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000; /* Đảm bảo nút luôn hiển thị trên cùng */
+  transition: background-color 0.3s ease;
+}
+
+.backhome-button:hover {
+  background-color: #ff1a1a;
+}

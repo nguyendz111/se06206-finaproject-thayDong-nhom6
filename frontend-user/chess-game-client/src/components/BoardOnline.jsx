@@ -1,4 +1,3 @@
-// BoardOnline.jsx
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import io from "socket.io-client";
@@ -38,10 +37,22 @@ const BoardOnline = () => {
       setPlayerColor(color);
     });
 
+    socket.on("opponent-move", ({ from, to }) => {
+      setBoard((prevBoard) => {
+        const newBoard = prevBoard.map((row) => [...row]);
+        newBoard[to[0]][to[1]] = newBoard[from[0]][from[1]];
+        newBoard[from[0]][from[1]] = "";
+        return newBoard;
+      });
+
+      setTurn((prevTurn) => (prevTurn === "w" ? "b" : "w"));
+    });
+
     return () => {
       socket.emit("leaveRoom", roomId);
       socket.off("gameState");
       socket.off("assignColor");
+      socket.off("opponent-move");
     };
   }, [roomId]);
 
@@ -62,6 +73,15 @@ const BoardOnline = () => {
     if (!selectedPiece || !selectedPosition) return;
 
     socket.emit("move", { roomId, from: selectedPosition, to: [row, col] });
+
+    setBoard((prevBoard) => {
+      const newBoard = prevBoard.map((row) => [...row]);
+      newBoard[col][row] = newBoard[selectedPosition[0]][selectedPosition[1]];
+      newBoard[selectedPosition[0]][selectedPosition[1]] = "";
+      return newBoard;
+    });
+
+    setTurn((prevTurn) => (prevTurn === "w" ? "b" : "w"));
 
     setSelectedPiece(null);
     setSelectedPosition(null);

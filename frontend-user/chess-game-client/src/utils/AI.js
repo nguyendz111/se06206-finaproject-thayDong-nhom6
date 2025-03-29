@@ -3,10 +3,24 @@ import { getPossibleMovesForPiece } from "./chessLogic";
 const pieceValues = {
   pawn: 1,
   knight: 3,
-  bishop: 3,
+  bishop: 3.5, // Tăng nhẹ giá trị tượng
   rook: 5,
   queen: 9,
   king: 1000,
+};
+
+// Giá trị vị trí quân cờ (ưu tiên trung tâm)
+const positionValues = {
+  pawn: [
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+    [0, 5, 10, 15, 15, 10, 5, 0],
+  ],
 };
 
 // Bộ nhớ đệm cho Alpha-Beta Pruning
@@ -46,14 +60,15 @@ function getAllPossibleMoves(board, color) {
         );
         for (let move of possibleMoves) {
           const isCapture = board[move[0]][move[1]] !== "";
-          moves.push({ from: [row, col], to: move, isCapture });
+          const captureValue = isCapture ? pieceValues[board[move[0]][move[1]].split("_")[0]] : 0;
+          moves.push({ from: [row, col], to: move, isCapture, captureValue });
         }
       }
     }
   }
 
-  // Move Ordering: Ưu tiên nước bắt quân
-  moves.sort((a, b) => (b.isCapture ? 1 : 0) - (a.isCapture ? 1 : 0));
+  // Move Ordering: Ưu tiên bắt quân mạnh hơn
+  moves.sort((a, b) => b.captureValue - a.captureValue);
 
   return moves;
 }
@@ -104,33 +119,35 @@ function minimax(board, depth, isMaximizing, color, alpha, beta) {
   }
 }
 
-// Đánh giá bàn cờ
+// Đánh giá bàn cờ với giá trị vị trí
 function evaluateBoard(board, color) {
   let score = 0;
-  for (let row of board) {
-    for (let piece of row) {
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const piece = board[row][col];
       if (piece) {
         const [type, pieceColor] = piece.split("_");
         const pieceValue = pieceValues[type] || 0;
-        score += pieceColor === color ? pieceValue : -pieceValue;
+        let positionalValue = positionValues[type] ? positionValues[type][row][col] : 0;
+        score += (pieceValue + positionalValue) * (pieceColor === color ? 1 : -1);
       }
     }
   }
   return score;
 }
 
-// Độ sâu thích ứng dựa trên số quân
+// Độ sâu thích ứng dựa trên số quân và độ khó
 function getDepthByDifficulty(difficulty, board) {
   const pieceCount = board.flat().filter((piece) => piece !== "").length;
 
-  if (difficulty === "easy") return 1;
+  if (difficulty === "easy") return 2;
 
   if (difficulty === "medium") return pieceCount > 20 ? 3 : 4;
 
   if (difficulty === "hard") {
-    if (pieceCount > 24) return 3; // Mở đầu
-    if (pieceCount > 16) return 4; // Giữa trận
-    return 5; // Cuối trận
+    if (pieceCount > 24) return 4; // Mở đầu
+    if (pieceCount > 16) return 5; // Giữa trận
+    return 6; // Cuối trận
   }
 
   return 3; // Mặc định Medium

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "../App.css";
 import { getPossibleMovesForPiece } from "../utils/chessLogic";
 import { getBestMove } from "../utils/AI";
@@ -26,14 +26,43 @@ const BoardAI = () => {
   const [winner, setWinner] = useState(null);
   const [isAIThinking, setIsAIThinking] = useState(false);
   const [capturedPieces, setCapturedPieces] = useState({ white: [], black: [] });
-  const [difficulty, setDifficulty] = useState(localStorage.getItem("difficulty") || "medium"); // Lấy từ LocalStorage
+  const difficulty = localStorage.getItem("difficulty") || "medium"; // Không cần setDifficulty
   const navigate = useNavigate();
 
-  // Lưu độ khó vào LocalStorage và reset game bằng reload
+  // Reset game với độ khó mới
   const resetGameWithDifficulty = (newDifficulty) => {
     localStorage.setItem("difficulty", newDifficulty);
-    window.location.reload(); // Giữ hiệu ứng reload như cũ
+    window.location.reload(); // Vẫn giữ nguyên reload theo yêu cầu
   };
+
+  // AI thực hiện nước đi
+  const handleAIMove = useCallback(() => {
+    const bestMove = getBestMove(board, "b", difficulty);
+    if (!bestMove || !bestMove.from || !bestMove.to) return;
+
+    const newBoard = board.map(r => [...r]);
+    const { from, to } = bestMove;
+    const capturedPiece = newBoard[to[0]][to[1]];
+
+    if (capturedPiece) {
+      const color = capturedPiece.endsWith("_w") ? "white" : "black";
+      setCapturedPieces(prev => ({
+        ...prev,
+        [color]: [...prev[color], capturedPiece],
+      }));
+    }
+
+    if (capturedPiece && capturedPiece.includes("king")) {
+      setWinner("Black wins!");
+      return;
+    }
+
+    newBoard[to[0]][to[1]] = newBoard[from[0]][from[1]];
+    newBoard[from[0]][from[1]] = "";
+
+    setBoard(newBoard);
+    setTurn("w");
+  }, [board, difficulty]); // Đưa vào dependencies
 
   useEffect(() => {
     if (turn === "b" && !winner) {
@@ -43,7 +72,7 @@ const BoardAI = () => {
         setIsAIThinking(false);
       }, 2000);
     }
-  }, [turn, difficulty]);
+  }, [turn, winner, handleAIMove]); // Đưa handleAIMove vào dependencies
 
   const handleSquareClick = (row, col) => {
     if (winner || turn === "b") return;
@@ -89,36 +118,14 @@ const BoardAI = () => {
     setPossibleMoves([]);
   };
 
-  const handleAIMove = () => {
-    const bestMove = getBestMove(board, "b", difficulty);
-    if (!bestMove || !bestMove.from || !bestMove.to) return;
-  
-    const newBoard = board.map(r => [...r]);
-    const { from, to } = bestMove;
-    const capturedPiece = newBoard[to[0]][to[1]];
-
-    if (capturedPiece) {
-      const color = capturedPiece.endsWith("_w") ? "white" : "black";
-      setCapturedPieces(prev => ({
-        ...prev,
-        [color]: [...prev[color], capturedPiece],
-      }));
-    }
-
-    if (capturedPiece && capturedPiece.includes("king")) {
-      setWinner("Black wins!");
-      return;
-    }
-
-    newBoard[to[0]][to[1]] = newBoard[from[0]][from[1]];
-    newBoard[from[0]][from[1]] = "";
-
-    setBoard(newBoard);
-    setTurn("w");
-  };
-
   return (
     <div className="game-container">
+      {/* Nút Back Home */}
+      <button className="backhome-button" onClick={() => navigate("/")}>
+        ⬅ Back Home
+      </button>
+
+      {/* Hiển thị quân cờ trắng bị ăn */}
       <div className="captured-pieces captured-black">
         {capturedPieces.white.map((piece, index) => (
           <img key={index} src={require(`../assets/images/${piece}.png`)} alt={piece} className="captured-piece" />
@@ -149,12 +156,10 @@ const BoardAI = () => {
           </div>
         </div>
 
-        {/* Nút chơi lại */}
         <button className="restart-button" onClick={() => resetGameWithDifficulty(difficulty)}>
           Play Again?
         </button>
 
-        {/* Chọn độ khó */}
         <div className="difficulty-select">
           <label htmlFor="difficulty">Select Difficulty: </label>
           <select
@@ -169,6 +174,7 @@ const BoardAI = () => {
         </div>
       </div>
 
+      {/* Hiển thị quân cờ đen bị ăn */}
       <div className="captured-pieces captured-white">
         {capturedPieces.black.map((piece, index) => (
           <img key={index} src={require(`../assets/images/${piece}.png`)} alt={piece} className="captured-piece" />

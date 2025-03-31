@@ -11,7 +11,7 @@ export default function Sidebar() {
   // Danh sách menu
   const menuItems = [
     { name: language === "en" ? "Play Online" : "Chơi Online", icon: <FaChess />, path: "/game" },
-    { name: language === "en" ? "Play Computer" : "Chơi với Máy", icon: <FaChess />, path: "/play-computer" },
+    { name: language === "en" ? "Play Computer" : "Chơi với Máy", icon: <FaChess />, path: "/game/ai" },
     { name: language === "en" ? "Create Room" : "Tạo Phòng", icon: <FaUsers />, path: "/create-room" },
     { name: language === "en" ? "Solve Puzzles" : "Giải Đố", icon: <FaPuzzlePiece />, path: "/puzzles" },
     { name: language === "en" ? "Lessons" : "Bài Học", icon: <FaGraduationCap />, path: "/learn" },

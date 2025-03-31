@@ -8,21 +8,38 @@ export default function HomePage() {
   const { language, setLanguage, theme, setTheme } = useContext(ThemeLanguageContext);
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Cập nhật class của HTML theo theme
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
   }, [theme]);
 
-  // Đổi ngôn ngữ
-  const toggleLanguage = () => setLanguage(language === "en" ? "vi" : "en");
+  // Đổi ngôn ngữ và lưu vào localStorage
+  const toggleLanguage = () => {
+    const newLanguage = language === "en" ? "vi" : "en";
+    setLanguage(newLanguage);
+    localStorage.setItem("language", newLanguage);
+  };
 
   // Đổi theme Light/Dark
-  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+  const toggleTheme = () => setTheme((prev) => (prev === "light" ? "dark" : "light"));
+
+  const handlePlayOnline = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/api/matchmaking", { method: "POST" });
+
+      if (!response.ok) throw new Error("Failed to find a match");
+
+      const data = await response.json();
+      navigate(`/game/online/${data.roomId}`);
+    } catch (error) {
+      console.error("Error finding match:", error);
+      alert(language === "en" ? "Failed to find a match. Try again later." : "Không tìm được trận đấu. Vui lòng thử lại sau.");
+    }
+  };
 
   const menuItems = [
-    { name: language === "en" ? "Play Online" : "Chơi Online", icon: <FaChess />, path: "/game" },
-    { name: language === "en" ? "Play Computer" : "Chơi với Máy", icon: <FaChess />, path: "/play-computer" },
+    { name: language === "en" ? "Play Online" : "Chơi Online", icon: <FaChess />, action: handlePlayOnline },
+    { name: language === "en" ? "Play Computer" : "Chơi với Máy", icon: <FaChess />, path: "/game/ai" },
     { name: language === "en" ? "Create Room" : "Tạo Phòng", icon: <FaUsers />, path: "/create-room" },
     { name: language === "en" ? "Solve Puzzles" : "Giải Đố", icon: <FaPuzzlePiece />, path: "/puzzles" },
     { name: language === "en" ? "Lessons" : "Bài Học", icon: <FaGraduationCap />, path: "/learn" },
@@ -39,21 +56,31 @@ export default function HomePage() {
         <h1 className={`text-lg font-bold mb-4 ${isExpanded ? "block" : "hidden"}`}>ChessPlayer</h1>
         <ul className="space-y-4">
           {menuItems.map((item) => (
-            <li key={item.name} className="flex items-center gap-2 cursor-pointer p-2 rounded-md hover:bg-red-800 transition" onClick={() => navigate(item.path)}>
+            <li
+              key={item.name}
+              className="flex items-center gap-2 cursor-pointer p-2 rounded-md hover:bg-red-800 transition"
+              onClick={() => item.action ? item.action() : navigate(item.path)}
+            >
               {item.icon} <span className={isExpanded ? "block" : "hidden"}>{item.name}</span>
             </li>
           ))}
         </ul>
-        <div className="mt-10 space-y-4">
-          <button className="flex items-center gap-2 transition hover:text-yellow-400" onClick={toggleLanguage}>
-            <FaGlobe /> <span className={isExpanded ? "block" : "hidden"}>{language === "en" ? "English" : "Tiếng Việt"}</span>
+
+        {/* Ngôn ngữ, Dark Mode và Đăng Nhập */}
+        <div className="mt-8 space-y-4">
+          <button className="flex items-center gap-2" onClick={toggleLanguage}>
+            <FaGlobe />
+            <span className={isExpanded ? "block" : "hidden"}>{language === "en" ? "Tiếng Việt" : "English"}</span>
           </button>
-          <button className="flex items-center gap-2 transition hover:text-yellow-400" onClick={toggleTheme}>
+
+          <button className="flex items-center gap-2" onClick={toggleTheme}>
             {theme === "light" ? <FaMoon /> : <FaSun />}
-            <span className={isExpanded ? "block" : "hidden"}>{theme === "light" ? "Dark Mode" : "Light Mode"}</span>
+            <span className={isExpanded ? "block" : "hidden"}>{language === "en" ? "Dark Mode" : "Chế Độ Tối"}</span>
           </button>
-          <button className="flex items-center gap-2 transition hover:text-yellow-400" onClick={() => navigate("/login")}>
-            <FaSignInAlt /> <span className={isExpanded ? "block" : "hidden"}>{language === "en" ? "Sign In" : "Đăng Nhập"}</span>
+
+          <button className="flex items-center gap-2" onClick={() => navigate("/login")}>
+            <FaSignInAlt />
+            <span className={isExpanded ? "block" : "hidden"}>{language === "en" ? "Login" : "Đăng Nhập"}</span>
           </button>
         </div>
       </div>
@@ -63,7 +90,11 @@ export default function HomePage() {
         <h2 className="text-2xl font-bold text-red-700 dark:text-red-400 mb-6">{language === "en" ? "Welcome to ChessPlayer!" : "Chào mừng đến với ChessPlayer!"}</h2>
         <div className="flex flex-col gap-4 w-80">
           {menuItems.map((item) => (
-            <button key={item.name} className="flex items-center gap-3 px-6 py-4 border-2 rounded-lg transition font-semibold w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white dark:border-red-400 dark:text-red-400 dark:hover:bg-red-400 dark:hover:text-black" onClick={() => navigate(item.path)}>
+            <button
+              key={item.name}
+              className="flex items-center gap-3 px-6 py-4 border-2 rounded-lg transition font-semibold w-full border-red-600 text-red-600 hover:bg-red-600 hover:text-white dark:border-red-400 dark:text-red-400 dark:hover:bg-red-400 dark:hover:text-black"
+              onClick={() => item.action ? item.action() : navigate(item.path)}
+            >
               {item.icon} {item.name}
             </button>
           ))}

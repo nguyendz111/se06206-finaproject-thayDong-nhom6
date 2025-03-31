@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@stomp/stompjs": "^7.1.0",
     "axios": "^1.8.2",
     "chess.js": "^1.1.0",
     "stockfish": "^16.0.0"

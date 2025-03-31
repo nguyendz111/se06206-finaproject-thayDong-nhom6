@@ -1,7 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import Board from "../components/Board";
+import Board from "../components/Board"; // Sử dụng Board mặc định
+import BoardAI from "../components/BoardAI";
+import BoardOnline from "../components/BoardOnline";
 import PlayComputerPage from "../pages/PlayComputerPage";
 import SigninForm from "../pages/SigninPage";
 import SignupForm from "../pages/SignupPage";
@@ -11,10 +13,18 @@ import CreateRoom from "../pages/CreateRoom";
 import WatchGame from "../pages/WatchGamePage";
 import { ThemeLanguageProvider, ThemeLanguageContext } from "../context/ThemeLanguageContext";
 
-function AppRoutes({ onGameOver, gameOver, winner }) {
+function AppRoutes() {
+  const [gameOver, setGameOver] = useState(false);
+  const [winner, setWinner] = useState(null);
+
+  const handleGameOver = (winner) => {
+    setGameOver(true);
+    setWinner(winner);
+  };
+
   return (
-    <ThemeLanguageProvider> {/* ✅ Bọc toàn bộ Routes */}
-      <ThemedRoutes onGameOver={onGameOver} gameOver={gameOver} winner={winner} />
+    <ThemeLanguageProvider>
+      <ThemedRoutes onGameOver={handleGameOver} gameOver={gameOver} winner={winner} />
     </ThemeLanguageProvider>
   );
 }
@@ -26,18 +36,21 @@ function ThemedRoutes({ onGameOver, gameOver, winner }) {
     <div className={`min-h-screen ${theme === "dark" ? "dark bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route
-          path="game"
-          element={gameOver ? <h2 className="text-center">{winner} thắng!</h2> : <Board onGameOver={onGameOver} />}
+        <Route 
+          path="/game/ai" 
+          element={gameOver ? <h2 className="text-center">{winner} thắng!</h2> : <BoardAI onGameOver={onGameOver} />} 
         />
-        <Route path="play-computer" element={<PlayComputerPage />} />
-        <Route path="profile" element={<h2 className="text-center">Thông tin người chơi</h2>} />
-        <Route path="login" element={<SigninForm />} />
-        <Route path="signup" element={<SignupForm />} />
-        <Route path="learn" element={<LessonsPage />} />
-        <Route path="puzzles" element={<PuzzlesPage />} />
-        <Route path="create-room" element={<CreateRoom />} />
-        <Route path="watch-games" element={<WatchGame />} />
+        <Route 
+          path="/game/online/:roomId" 
+          element={<BoardOnline onGameOver={onGameOver} />} 
+        />
+        <Route path="/create-room" element={<CreateRoom />} />
+        <Route path="/watch-games" element={<WatchGame />} />
+        <Route path="/profile" element={<h2 className="text-center">Thông tin người chơi</h2>} />
+        <Route path="/login" element={<SigninForm />} />
+        <Route path="/signup" element={<SignupForm />} />
+        <Route path="/learn" element={<LessonsPage />} />
+        <Route path="/puzzles" element={<PuzzlesPage />} />
       </Routes>
     </div>
   );

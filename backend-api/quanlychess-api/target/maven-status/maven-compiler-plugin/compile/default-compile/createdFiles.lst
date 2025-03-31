@@ -1,5 +1,0 @@
-com\btec\quanlychess_api\QuanlychessApiApplication.class
-com\btec\quanlychess_api\model\User.class
-com\btec\quanlychess_api\repository\UserRepository.class
-com\btec\quanlychess_api\controller\UserController.class
-com\btec\quanlychess_api\service\UserService.class

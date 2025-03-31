@@ -1,0 +1,279 @@
+/* 📌 Hiệu ứng bàn cờ */
+.board-container {
+  display: inline-block;
+  border: 10px solid rgb(209, 211, 206);
+  border-radius: 12px;
+  background-size: cover;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: fadeIn 1.5s ease;
+}
+
+/* 📌 Định dạng hàng bàn cờ */
+.row {
+  display: flex;
+}
+
+/* 📌 Kích thước và hiệu ứng ô cờ */
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.white-square {
+  background-color: #DEB887;
+}
+
+.black-square {
+  background-color: #1a683e;
+}
+
+.square:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 10px red;
+}
+
+/* 📌 Hiệu ứng quân cờ */
+.chess-piece {
+  width: 50px;
+  height: 50px;
+  cursor: grab;
+  transition: transform 0.3s ease, top 0.5s ease, left 0.5s ease;
+  position: relative;
+}
+
+.chess-piece.moving {
+  transform: translate(0, 0);
+}
+
+.chess-piece:active {
+  transform: scale(1.2);
+}
+
+/* 📌 Danh sách quân cờ bị ăn */
+.captured-pieces {
+  display: flex;
+  flex-direction: row; /* Hiển thị theo hàng ngang */
+  align-items: center;
+  gap: 8px; /* Khoảng cách giữa các quân cờ */
+  padding: 10px;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  flex-wrap: wrap; /* Tự động xuống dòng nếu quá nhiều quân cờ */
+}
+
+/* 📌 Quân cờ bị ăn */
+.captured-piece {
+  width: 45px;
+  height: 45px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: brightness(0.9);
+  border: 1px solid white;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  padding: 5px;
+}
+
+/* 📌 Hiệu ứng ô cờ được chọn */
+.highlight {
+  background-color: gray;
+  border-radius: 50%;
+}
+
+/* 📌 Hiệu ứng thông báo chiến thắng */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(188, 16, 16, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: fadeIn 0.5s ease;
+}
+
+.modal {
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: #0d7ff1;
+  animation: popUp 0.3s ease;
+}
+
+/* 📌 Hiệu ứng Game Over */
+.game-over-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.game-over-message {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+.game-over-message h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+}
+
+/* 📌 Căn chỉnh tổng thể */
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+  position: relative;
+}
+
+.board-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  position: relative;
+}
+
+.board-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 📌 Nút Restart chính */
+.restart-button {
+  position: absolute;
+  right: -150px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ff5722;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 5px;
+}
+
+.restart-button:hover {
+  background: #e64a19;
+  transform: scale(1.1);
+}
+
+/* 📌 Nút Play Again hiển thị sau khi có người thắng */
+.play-again-button {
+  display: none;
+  margin-top: 15px;
+  background: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 5px;
+  position: absolute;
+  top: 70%;  /* Đưa nút xuống gần bàn cờ */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  pointer-events: auto; /* ✅ Cho phép bấm */
+}
+
+/* 📌 Hiển thị nút Play Again khi có người thắng */
+.show-play-again .play-again-button {
+  display: block;
+}
+
+
+/* 📌 Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.difficulty-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.difficulty-select label {
+  font-size: 16px;
+  color: #333;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.difficulty-select select {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.difficulty-select select:hover {
+  border-color: #007bff;
+}
+
+.difficulty-select select:focus {
+  outline: none;
+  border-color: #0056b3;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}
+.backhome-button {
+  position: fixed; /* Giữ cố định ở vị trí trên màn hình */
+  top: 10px;       /* Căn cách từ trên xuống 10px */
+  left: 10px;      /* Căn cách từ trái qua 10px */
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1000; /* Đảm bảo nút luôn hiển thị trên cùng */
+  transition: background-color 0.3s ease;
+}
+
+.backhome-button:hover {
+  background-color: #ff1a1a;
+}

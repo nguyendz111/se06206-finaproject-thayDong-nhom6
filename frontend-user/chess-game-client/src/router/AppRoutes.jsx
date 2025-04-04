@@ -1,14 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
-import Board from "../components/Board"; // Sử dụng Board mặc định
 import BoardAI from "../components/BoardAI";
 import BoardOnline from "../components/BoardOnline";
-import PlayComputerPage from "../pages/PlayComputerPage";
 import SigninForm from "../pages/SigninPage";
 import SignupForm from "../pages/SignupPage";
 import LessonsPage from "../pages/LessonsPage";
-import PuzzlesPage from "../pages/PuzzlesPage";
+import PuzzlesPage from "../pages/SolvePuzzles";
 import CreateRoom from "../pages/CreateRoom";
 import WatchGame from "../pages/WatchGamePage";
 import { ThemeLanguageProvider, ThemeLanguageContext } from "../context/ThemeLanguageContext";

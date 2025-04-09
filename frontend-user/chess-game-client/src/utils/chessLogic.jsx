@@ -1,4 +1,4 @@
-export function getPossibleMovesForPiece(piece, position, board) {
+    export function getPossibleMovesForPiece(piece, position, board) {
     if (!piece) return [];
 
     const [row, col] = position;

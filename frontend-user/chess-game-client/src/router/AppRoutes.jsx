@@ -6,7 +6,7 @@ import BoardOnline from "../components/BoardOnline";
 import SigninForm from "../pages/SigninPage";
 import SignupForm from "../pages/SignupPage";
 import LessonsPage from "../pages/LessonsPage";
-import PuzzlesPage from "../pages/PuzzlesPage";
+import PuzzlesPage from "../pages/SolvePuzzles";
 import CreateRoom from "../pages/CreateRoom";
 import WatchGame from "../pages/WatchGamePage";
 

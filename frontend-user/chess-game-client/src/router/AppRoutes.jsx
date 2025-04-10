@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import BoardAI from "../components/BoardAI";
 import BoardOnline from "../components/BoardOnline";
-import PlayComputerPage from "../pages/PlayComputerPage";
 import SigninForm from "../pages/SigninPage";
 import SignupForm from "../pages/SignupPage";
 import LessonsPage from "../pages/LessonsPage";

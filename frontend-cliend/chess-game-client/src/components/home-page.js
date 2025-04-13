@@ -1,17 +1,6 @@
 import { useState, useEffect } from "react";
 
-import {
-  FaGamepad,
-  FaPuzzlePiece,
-  FaBook,
-  FaTv,
-  FaCommentDots,
-  FaSun,
-  FaMoon,
-  FaGlobe,
-  FaSignOutAlt,
-  FaSignInAlt
-} from "react-icons/fa";
+import {FaGamepad,FaPuzzlePiece,FaBook,FaTv,FaCommentDots,FaSun,FaMoon,FaGlobe,FaSignOutAlt,FaSignInAlt} from "react-icons/fa";
 
 function MenuItem({ icon, text, isExpanded, link }) {
   return (
@@ -62,7 +51,7 @@ export default function HomePage() {
       >
         <a href="/" className="flex items-center space-x-3 mt-5 mb-5">
           <img src="/images/chess-piece.png" alt="logo" className="w-12 h-12" />
-          {isExpanded && <span className="text-2xl font-bold">CoTuong.com</span>}
+          {isExpanded && <span className="text-2xl font-bold">ChessPlayer</span>}
         </a>
 
         <nav className="space-y-4 w-full">
@@ -124,18 +113,16 @@ export default function HomePage() {
         >
           <a href="/chess-offline" className="block p-3 hover:bg-gray-200"><img src="images/play-computer-sm.svg" alt="compiter" /> {language === "en" ? "Play vs Computer" : "Chơi với máy"}</a>
           <a href="/chess-online" className="block p-3 hover:bg-gray-200"><img src="images/challenge-friends.svg" alt="computer" /> {language === "en" ? "Play Online" : "Chơi trực tuyến"}</a>
-          <a href="/option3" className="block p-3 hover:bg-gray-200">{language === "en" ? "Custom 3" : "Tùy chỉnh 3"}</a>
-          <a href="/option4" className="block p-3 hover:bg-gray-200">{language === "en" ? "Custom 4" : "Tùy chỉnh 4"}</a>
         </div>
       )}
 
       <main className="flex-1 flex flex-col items-center justify-center p-10">
         <h2 className="text-3xl font-bold mb-5">
-          <a href="/" className="text-orange-900 hover:underline">{language === "en" ? "Welcome to CoTuong.com!" : "Chào mừng đến với CoTuong.com!"}</a>
+          <a href="/" className="text-orange-900 hover:underline">{language === "en" ? "Welcome to ChessPlayer!" : "Chào mừng đến với ChessPlayer!"}</a>
         </h2>
         <div className="space-y-4 w-96">
           <MainButton icon={<FaGamepad />} title={language === "en" ? "Play Online" : "Chơi Online"} subtitle={language === "en" ? "Challenge Players Worldwide" : "Thách đấu người chơi toàn cầu"} link="/chess-online" />
-          <MainButton icon={<FaTv />} title={language === "en" ? "Play Computer" : "Chơi với máy"} subtitle={language === "en" ? "Test Your Skills Against AI" : "Thử thách với AI"} link="/chess-offline" />
+          <MainButton icon={<FaTv />} title={language === "en" ? "Play Computer" : "Chơi với máy"} subtitle={language === "en" ? "Test Your Skills Against AI" : "Thử thách với AI"} link="/game/ai" />
           <MainButton icon={<FaPuzzlePiece />} title={language === "en" ? "Solve Puzzles" : "Giải đố"} subtitle={language === "en" ? "Solve Brain-Teasing Puzzles" : "Giải câu đố thử thách"} link="/chess-puzzle" />
           <MainButton icon={<FaBook />} title={language === "en" ? "Lessons" : "Khóa học"} subtitle={language === "en" ? "Learn How to Play" : "Học cách chơi Cờ Tướng"} link="/chess-courses" />
           <MainButton icon={<FaTv />} title={language === "en" ? "Watch Games" : "Xem Trận Đấu"} subtitle={language === "en" ? "Learn from Other Players" : "Học từ người chơi khác"} link="/ActiveGames" />

@@ -5,7 +5,7 @@ import ChessOnline from "./components/chess-online";
 import ChessMonitor from "./components/chess-monitor";
 import ChessPuzzleClient from "./components/chess-puzzle-client";
 import ChessAI from "./components/ChessAI";
-
+import Lessons from "./components/LessonsPage"
 const App = () => {
   return (
     <Router>
@@ -15,6 +15,7 @@ const App = () => {
         <Route path="/monitor" element={<ChessMonitor />} />
         <Route path="/puzzleclient" element={<ChessPuzzleClient />} />
         <Route path="/game/ai" element={<ChessAI />} />
+        <Route path="/learn" element={<Lessons/>} />
       </Routes>
     </Router>
   );

@@ -1,251 +1,300 @@
 /* 📌 Căn chỉnh tổng thể */
 .game-container {
-    display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    height: 100vh;
-    gap: 20px;
-    position: relative;
+  display: flex;
+  justify-content: center; /* Căn giữa theo chiều ngang */
+  align-items: center; /* Căn giữa theo chiều dọc */
+  height: 100vh;
+  gap: 20px;
+  position: relative;
+}
+
+/* 📌 Định dạng bảng thông tin (info-panel) bên trái */
+.info-panel {
+  background-color: #f7f7f7; /* Màu nền giống trong hình */
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #ccc; /* Viền giống trong hình */
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 📌 Tiêu đề Chess AI */
+.info-panel h2 {
+  margin: 0;
+  font-size: 1.5em;
+  text-align: center;
+  color: #333;
+  background-color: #f5a623; /* Màu cam giống trong hình */
+  padding: 5px;
+  border-radius: 5px;
+}
+
+/* 📌 Định dạng phần thông tin lượt đi và đồng hồ */
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 📌 Định dạng văn bản lượt đi */
+.turn-info span {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* 📌 Định dạng đồng hồ thời gian */
+.timers {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 📌 Định dạng thời gian của từng bên */
+.timer {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timer-label {
+  font-weight: bold;
+  color: #333;
+}
+
+.timer-time {
+  display: flex;
+  gap: 10px;
+}
+
+.total-time,
+.move-time {
+  font-size: 14px;
+  color: #333;
+}
+
+/* 📌 Định dạng bàn cờ */
+.board-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 📌 Định dạng nội dung bàn cờ */
+.board-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 📌 Hiệu ứng bàn cờ */
+.board-container {
+  display: inline-block;
+  border: 10px solid rgb(209, 211, 206);
+  border-radius: 12px;
+  background-size: cover;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: fadeIn 1.5s ease;
+}
+
+/* 📌 Định dạng hàng bàn cờ */
+.row {
+  display: flex;
+}
+
+/* 📌 Kích thước và hiệu ứng ô cờ */
+.square {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.white-square {
+  background-color: #DEB887;
+}
+
+.black-square {
+  background-color: #1a683e;
+}
+
+.square:hover {
+  transform: scale(1.05);
+  box-shadow: inset 0 0 10px red;
+}
+
+/* 📌 Hiệu ứng quân cờ */
+.chess-piece {
+  width: 50px;
+  height: 50px;
+  cursor: grab;
+  transition: transform 0.3s ease, top 0.5s ease, left 0.5s ease;
+  position: relative;
+}
+
+.chess-piece.moving {
+  transform: translate(0, 0);
+}
+
+.chess-piece:active {
+  transform: scale(1.2);
+}
+
+/* 📌 Hiệu ứng ô cờ được chọn */
+.highlight {
+  background-color: gray;
+  border-radius: 50%;
+}
+
+/* 📌 Thông báo chiếu tướng */
+.check-message-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15;
+}
+
+.check-message {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.check-message h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+}
+
+/* 📌 Thông báo Game Over */
+.game-over-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.game-over-message {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.game-over-message h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 15px;
+}
+
+/* 📌 Định dạng các nút trong game over */
+.game-over-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.home-button {
+  background: #ff4444; /* Màu đỏ cho nút quay về trang chủ */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 5px;
+}
+
+.home-button:hover {
+  background: #cc0000;
+}
+
+.restart-button {
+  background: #4CAF50; /* Màu xanh cho nút chơi lại */
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  border-radius: 5px;
+}
+
+.restart-button:hover {
+  background: #45a049;
+}
+
+/* 📌 Pawn promotion modal */
+.promotion-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.promotion-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.promotion-options {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.promotion-piece {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.promotion-piece:hover {
+  transform: scale(1.1);
+}
+
+/* 📌 Hiệu ứng xuất hiện */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  /* 📌 Định dạng bảng thông tin (info-panel) bên trái */
-  .info-panel {
-    background-color: #f7f7f7; /* Màu nền giống trong hình */
-    padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #ccc; /* Viền giống trong hình */
-    width: 200px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  to {
+    opacity: 1;
   }
-  
-  /* 📌 Tiêu đề Chess AI */
-  .info-panel h2 {
-    margin: 0;
-    font-size: 1.5em;
-    text-align: center;
-    color: #333;
-    background-color: #f5a623; /* Màu cam giống trong hình */
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  /* 📌 Định dạng phần thông tin lượt đi và đồng hồ */
-  .game-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  /* 📌 Định dạng văn bản lượt đi */
-  .turn-info span {
-    display: block;
-    font-size: 16px;
-    color: #333;
-    font-weight: bold;
-  }
-  
-  /* 📌 Định dạng đồng hồ thời gian */
-  .timers {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  /* 📌 Định dạng thời gian của từng bên */
-  .timer {
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .timer-label {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .timer-time {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .total-time,
-  .move-time {
-    font-size: 14px;
-    color: #333;
-  }
-  
-  /* 📌 Định dạng bàn cờ */
-  .board-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  
-  /* 📌 Định dạng nội dung bàn cờ */
-  .board-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* 📌 Hiệu ứng bàn cờ */
-  .board-container {
-    display: inline-block;
-    border: 10px solid rgb(209, 211, 206);
-    border-radius: 12px;
-    background-size: cover;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    animation: fadeIn 1.5s ease;
-  }
-  
-  /* 📌 Định dạng hàng bàn cờ */
-  .row {
-    display: flex;
-  }
-  
-  /* 📌 Kích thước và hiệu ứng ô cờ */
-  .square {
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  .white-square {
-    background-color: #DEB887;
-  }
-  
-  .black-square {
-    background-color: #1a683e;
-  }
-  
-  .square:hover {
-    transform: scale(1.05);
-    box-shadow: inset 0 0 10px red;
-  }
-  
-  /* 📌 Hiệu ứng quân cờ */
-  .chess-piece {
-    width: 50px;
-    height: 50px;
-    cursor: grab;
-    transition: transform 0.3s ease, top 0.5s ease, left 0.5s ease;
-    position: relative;
-  }
-  
-  .chess-piece.moving {
-    transform: translate(0, 0);
-  }
-  
-  .chess-piece:active {
-    transform: scale(1.2);
-  }
-  
-  /* 📌 Hiệu ứng ô cờ được chọn */
-  .highlight {
-    background-color: gray;
-    border-radius: 50%;
-  }
-  
-  /* 📌 Hiệu ứng Game Over */
-  .game-over-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 20;
-  }
-  
-  .game-over-message {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-    text-align: center;
-  }
-  
-  .game-over-message h2 {
-    font-size: 24px;
-    font-weight: bold;
-    color: red;
-  }
-  
-  /* 📌 Nút Play Again hiển thị sau khi có người thắng */
-  .restart-button {
-    margin-top: 15px;
-    background: #4CAF50;
-    color: white;
-    padding: 12px 20px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease;
-    border-radius: 5px;
-  }
-  
-  .restart-button:hover {
-    background: #45a049;
-  }
-  
-  /* 📌 Pawn promotion modal */
-  .promotion-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-  }
-  
-  .promotion-modal {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  
-  .promotion-options {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .promotion-piece {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-  }
-  
-  .promotion-piece:hover {
-    transform: scale(1.1);
-  }
-  
-  /* 📌 Hiệu ứng xuất hiện */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+}

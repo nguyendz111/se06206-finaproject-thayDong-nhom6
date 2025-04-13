@@ -199,7 +199,7 @@ const LessonsPage = () => {
       {/* Top bar with Back button on left, level buttons on right */}
       <div className="w-full bg-red-700 text-white p-4 flex justify-between items-center">
         <Link
-          to="/"
+          to="/home"
           className="p-2 bg-white text-black font-bold rounded-md border border-red-600 hover:bg-gray-200 transition"
         >
           Back to Home
@@ -208,7 +208,7 @@ const LessonsPage = () => {
           {['Beginner', 'Intermediate', 'Advanced'].map((level) => (
             <button
               key={level}
-              className={`p-2 rounded-md transition font-bold border border-gray-500 ${
+              className={`p-2 rounded-md transition font-bold border border-gray-500 {
                 selectedLevel === level
                   ? 'bg-white text-black'
                   : 'bg-white text-black hover:bg-gray-500'

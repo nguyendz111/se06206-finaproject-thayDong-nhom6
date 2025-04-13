@@ -50,7 +50,7 @@ export default function HomePage() {
         }}
       >
         <a href="/" className="flex items-center space-x-3 mt-5 mb-5">
-          <img src="/images/chess-piece.png" alt="logo" className="w-12 h-12" />
+         
           {isExpanded && <span className="text-2xl font-bold">ChessPlayer</span>}
         </a>
 
@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
           <MenuItem icon={<FaPuzzlePiece />} text={language === "en" ? "Puzzles" : "Câu đố"} isExpanded={isExpanded} link="/chess-puzzle" />
           <MenuItem icon={<FaBook />} text={language === "en" ? "Course" : "Khóa học"} isExpanded={isExpanded} link="/chess-courses" />
-          <MenuItem icon={<FaCommentDots />} text={language === "en" ? "Chat" : "Trò chuyện"} isExpanded={isExpanded} link="/chess-chat" />
+
         </nav>
 
         <div className="mt-auto space-y-3 w-full mb-5">

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Clock, Eye, Users, Trophy, X, ChevronLeft, MessageSquare } from 'lucide-react';
 
 // Khởi tạo kết nối socket
-const ENDPOINT = 'http://localhost:4000'; // Thay thế bằng URL server của bạn
+const ENDPOINT = 'http://150.95.115.213:4000'; // Thay thế bằng URL server của bạn
 const socket = io(ENDPOINT);
 
 const ChessMonitor = () => {

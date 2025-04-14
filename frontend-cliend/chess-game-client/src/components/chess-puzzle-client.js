@@ -23,7 +23,7 @@ const ChessPuzzleClient = () => {
 
   const fetchPuzzles = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/puzzles');
+      const response = await axios.get('http://150.95.115.213:3001/puzzles');
       setPuzzles(response.data);
       setMessage('Select a puzzle to play');
     } catch (error) {
@@ -35,7 +35,7 @@ const ChessPuzzleClient = () => {
   // Select a puzzle to play
   const selectPuzzle = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3001/puzzles/${id}`);
+      const response = await axios.get(`http://150.95.115.213:3001/puzzles/${id}`);
       const puzzle = response.data;
       
       setCurrentPuzzle(puzzle);

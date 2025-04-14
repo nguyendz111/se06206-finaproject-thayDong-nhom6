@@ -6,7 +6,7 @@ import './chessonline.css';
 
 // Định nghĩa các hằng số
 const BOARD_SIZE = 8;
-const SOCKET_SERVER_URL = 'http://localhost:4000'; // Thay đổi URL server tùy theo cấu hình
+const SOCKET_SERVER_URL = 'http://150.95.115.213:4000'; // Thay đổi URL server tùy theo cấu hình
 const PIECE_SYMBOLS = {
   'p': <FaChessPawn className="piece black-piece" />,
   'r': <FaChessRook className="piece black-piece" />,

@@ -26,7 +26,7 @@ const ChessPuzzle = () => {
 
   const fetchPuzzles = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/puzzles');
+      const response = await axios.get('http://150.95.115.213:3001/puzzles');
       setPuzzles(response.data);
     } catch (error) {
       console.error('Error fetching puzzles:', error);
@@ -37,7 +37,7 @@ const ChessPuzzle = () => {
   // Select a puzzle to play or edit
   const selectPuzzle = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3001/puzzles/${id}`);
+      const response = await axios.get(`http://150.95.115.213:3001/puzzles/${id}`);
       const puzzle = response.data;
       
       setCurrentPuzzle(puzzle);
@@ -95,10 +95,10 @@ const ChessPuzzle = () => {
       };
 
       if (isCreating) {
-        await axios.post('http://localhost:3001/puzzles', puzzleData);
+        await axios.post('http://150.95.115.213:3001/puzzles', puzzleData);
         setMessage('New puzzle created successfully!');
       } else {
-        await axios.put(`http://localhost:3001/puzzles/${currentPuzzle.id}`, puzzleData);
+        await axios.put(`http://150.95.115.213:3001/puzzles/${currentPuzzle.id}`, puzzleData);
         setMessage('Puzzle updated successfully!');
       }
 
@@ -117,7 +117,7 @@ const ChessPuzzle = () => {
 
     if (window.confirm('Are you sure you want to delete this puzzle?')) {
       try {
-        await axios.delete(`http://localhost:3001/puzzles/${currentPuzzle.id}`);
+        await axios.delete(`http://150.95.115.213:3001/puzzles/${currentPuzzle.id}`);
         setMessage('Puzzle deleted successfully!');
         setCurrentPuzzle(null);
         setBoard([]);

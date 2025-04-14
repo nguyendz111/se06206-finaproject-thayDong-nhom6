@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3003",
+    origin: "http://150.95.115.213:3003",
     credentials: true,
   })
 );
@@ -21,14 +21,14 @@ app.use(
     secret: process.env.SESSION_SECRET || "your-secret-key", // Dùng biến môi trường
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL || "mongodb://localhost:27017/chess_db" }),
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URL || "mongodb://150.95.115.213:27017/chess_db" }),
     cookie: { maxAge: 24 * 60 * 60 * 1000 }, // 1 ngày
   })
 );
 
 // Kết nối MongoDB
 mongoose
-  .connect(process.env.MONGO_URL || "mongodb://localhost:27017/chess_db", {
+  .connect(process.env.MONGO_URL || "mongodb://150.95.115.213:27017/chess_db", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -117,5 +117,5 @@ app.post("/logout", (req, res) => {
 
 const PORT = process.env.PORT || 3002; // Dùng biến môi trường
 app.listen(PORT, () => {
-  console.log(`🚀 Server 2 đang chạy tại http://localhost:${PORT}`);
+  console.log(`🚀 Server 2 đang chạy tại http://150.95.115.213:${PORT}`);
 });

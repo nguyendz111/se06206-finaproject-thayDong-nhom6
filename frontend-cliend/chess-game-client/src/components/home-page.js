@@ -74,7 +74,7 @@ export default function HomePage() {
     <div className={`flex ${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"}`}>
       {/* Sidebar */}
       <aside
-        className={`min-h-screen bg-orange-900 text-white flex flex-col items-center transition-all duration-300 ${
+        className={`min-h-screen bg-yellow-600 text-white flex flex-col items-center transition-all duration-300 ${
           isExpanded ? "w-64" : "w-16"
         }`}
         onMouseEnter={() => setIsExpanded(true)}

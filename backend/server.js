@@ -708,7 +708,7 @@ app.get('/api/rooms', (req, res) => {
 });
 
 // Start the server
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

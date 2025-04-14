@@ -849,7 +849,7 @@ const ChessAI = () => {
             <div className="game-over-buttons">
               <button
                 className="home-button"
-                onClick={() => (window.location.href = "/")}
+                onClick={() => (window.location.href = "/home")}
               >
                 Quay về trang chủ
               </button>

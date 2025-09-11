@@ -1,0 +1,218 @@
+/* ChessPuzzle.css */
+.chess-puzzle-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .message {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    border-left: 4px solid #007bff;
+    color: #333;
+  }
+  
+  .main-content {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .left-panel, .right-panel {
+    flex: 1;
+  }
+  
+  .left-panel {
+    max-width: 300px;
+  }
+  
+  .center-panel {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .chess-board {
+    width: 480px;
+    height: 480px;
+    border: 2px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .board-row {
+    display: flex;
+    height: 60px;
+  }
+  
+  .board-cell {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .cell-light {
+    background-color: #f0d9b5;
+  }
+  
+  .cell-dark {
+    background-color: #b58863;
+  }
+  
+  .cell-light.selected {
+    background-color: #9ac0cd;
+  }
+  
+  .cell-dark.selected {
+    background-color: #7a9bad;
+  }
+  
+  .valid-move::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 128, 0, 0.3);
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .chess-piece {
+    font-size: 40px;
+    cursor: pointer;
+  }
+  
+  .chess-piece.white {
+    color: #fff;
+    text-shadow: 0 0 2px #000;
+  }
+  
+  .chess-piece.black {
+    color: #000;
+  }
+  
+  .piece-selector {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+ 
+  .piece-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .piece-option {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0d9b5;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .piece-option.selected {
+    background-color: #9ac0cd;
+    border: 2px solid #007bff;
+  }
+  .piece-option.delete {
+    font-size: 20px;
+  }
+  .puzzle-list {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .puzzle-list h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  .puzzle-list button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .puzzle-list button:hover {
+    background-color: #45a049;
+  }
+  .puzzle-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .puzzle-list li {
+    padding: 8px;
+    margin-bottom: 4px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .puzzle-list li:hover {
+    background-color: #e9e9e9;
+  }
+  .puzzle-editor {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .puzzle-editor h2 {
+    margin-top: 0;
+    color: #333;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  .form-group input[type="text"],
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  .form-group input[type="range"] {
+    width: 80%;
+  }
+  .buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .buttons button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .buttons button:hover {
+    background-color: #0069d9;
+  }
+  .buttons button:nth-child(2) {
+    background-color: #dc3545;
+  }
+  .buttons button:nth-child(2):hover {
+    background-color: #c82333;
+  }
